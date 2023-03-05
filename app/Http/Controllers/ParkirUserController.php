@@ -110,11 +110,18 @@ class ParkirUserController extends Controller
     public function update(UserExitRequest $request, $user)
     {
         $data = ParkirUser::getData($user);
-        $waktu_keluar = \Carbon\Carbon::now()->toDateTimeString();
-        $menuju = Carbon::createFromFormat('Y-m-d H:i:s', $waktu_keluar);
-        $dari = Carbon::createFromFormat('Y-m-d H:i:s', $data->waktu_masuk);
-        $selisihJam = $menuju->diffInHours($dari);
-        $tarif = $data->tarif * $selisihJam;
+        $waktu_keluar = Carbon::now()->setTimezone('Asia/Jakarta');
+        $keluar = strtotime($waktu_keluar);
+        $waktu_masuk = strtotime($data->waktu_masuk);
+
+        $diff = $keluar - $waktu_masuk;
+        if (floor($diff / (60 * 60)) == 0.0) {
+            $tarif = $data->tarif;
+        } else {
+            $jam = floor($diff / (60 * 60));
+            $tarif  = $data->tarif * ceil($jam);
+        }
+        $hasil_rupiah = "Rp " . number_format($tarif, 0, ',', '. ');
         ParkirUser::where('kode_unik', $user)->update([
             'waktu_masuk' => $data->waktu_masuk,
             'waktu_keluar' => $waktu_keluar,

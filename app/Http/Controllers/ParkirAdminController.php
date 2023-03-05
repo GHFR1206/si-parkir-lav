@@ -21,7 +21,8 @@ class ParkirAdminController extends Controller
         $aktif = ParkirUser::where('status', 'aktif')->get()->count();
         $selesai = ParkirUser::where('status', 'selesai')->get()->count();
         $dataaktifs = ParkirUser::where('status', 'aktif')->paginate('7');
-        return view('parkiradmin.index', compact('aktif', 'dataaktifs', 'selesai'));
+        $pendapatan = ParkirUser::sum('tarif');
+        return view('parkiradmin.index', compact('aktif', 'dataaktifs', 'selesai', 'pendapatan'));
     }
 
     public function data_selesai()
@@ -55,6 +56,8 @@ class ParkirAdminController extends Controller
         $waktu_masuk = \Carbon\Carbon::now()->toDateTimeString();
         $kode_unik = Str::random(5);
         $no_kendaraan = $request->no_kendaraan;
+        $no_kendaraan = Str::slug($no_kendaraan, '-');
+        $no_kendaraan = Str::upper($no_kendaraan);
         $merk = $request->merk;
         $tipe = $request->tipe;
 

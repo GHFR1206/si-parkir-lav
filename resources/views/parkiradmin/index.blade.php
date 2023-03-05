@@ -3,7 +3,37 @@
         <div class="row d-flex justify-content-end">
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-success">
+            <div class="small-box bg-secondary">
+              <div class="inner">
+                <h3>Rp. {{number_format($pendapatan, 0, ',', '.')}}</h3>
+
+                <p>Total Pendapatan</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-file-invoice-dollar"></i>
+              </div>
+              <a href="{{ route('admin.data.selesai') }}" class="small-box-footer">Info lanjut <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-secondary">
+              <div class="inner">
+                <h3>{{ $selesai }}</h3>
+
+                <p>Motor</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-motorcycle"></i>
+              </div>
+              <a href="{{ route('admin.data.selesai') }}" class="small-box-footer">Info lanjut <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-secondary">
               <div class="inner">
                 <h3>{{ $aktif }}</h3>
 
@@ -25,7 +55,7 @@
                 <p>Kendaraan Selesai</p>
               </div>
               <div class="icon">
-                <i class="ion ion-android-car"></i>
+                <i class="fas fa-check-circle"></i>
               </div>
               <a href="{{ route('admin.data.selesai') }}" class="small-box-footer">Info lanjut <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -45,7 +75,6 @@
                     <tr>
                       <th>No</th>
                       <th>Nomor Kendaraan</th>
-                      <th>Kode Unik</th>
                       <th>Merk</th>
                       <th>Tipe</th>
                       <th>Waktu Masuk</th>
@@ -53,11 +82,10 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($dataaktifs as $index => $data)
+                    @forelse ($dataaktifs as $index => $data)
                     <tr>
                       <td>{{ $index + $dataaktifs->firstItem()  }}</td>
                       <td>{{ $data->no_kendaraan }}</td>
-                      <td>{{ $data->kode_unik }}</td>
                       <td>{{ $data->merk }}</td>
                       <td>{{ $data->tipe }}</td>
                       <td>{{ $data->waktu_masuk }}</td>
@@ -66,7 +94,13 @@
                         <a href="{{ route('admin.exit.user', $data->kode_unik) }}" class="btn btn-danger">Keluar</a>
                       </td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr>
+                      <td colspan="6" class="text-center p-5">
+                        Belum ada yang parkir
+                      </td>
+                    </tr>
+                    @endforelse
                   </tbody>
                 </table>
               </div>
