@@ -1,6 +1,16 @@
 <div class="input-group mb-3">
+  <div class="form-control text-muted">
+    <span id="tanggal"></span> ; <span id="watch"></span>
+  </div>
+  <div class="input-group-append">
+    <div class="input-group-text">
+      <span class="fa-solid fa-clock"></span>
+    </div>
+  </div>
+</div>
+
+<div class="input-group mb-3">
     <input type="text" class="form-control @error('no_kendaraan') is-invalid @enderror" name="no_kendaraan" placeholder="Nomor Kendaraan" autocomplete="off">
-    
     <div class="input-group-append">
       <div class="input-group-text">
         <span class="fa-solid fa-car"></span>
@@ -24,6 +34,11 @@
       <option value="Volkswagen">Volkswagen</option>
       <option value="Audi">Audi</option>
     </datalist>
+    <div class="input-group-append">
+      <div class="input-group-text">
+        <span class="fa-solid fa-copyright"></span>
+      </div>
+    </div>
     @error('merk')
       <span class="invalid-feedback">Merk kendaraan wajib diisi</span>
     @enderror

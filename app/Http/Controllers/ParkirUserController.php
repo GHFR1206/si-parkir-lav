@@ -21,6 +21,7 @@ class ParkirUserController extends Controller
 
         return view('parkiruser.index', [
             'submit' => 'Masuk',
+            'parkir' => 'null'
         ]);
     }
 
@@ -50,6 +51,13 @@ class ParkirUserController extends Controller
         $merk = $request->merk;
         $tipe = $request->tipe;
 
+        // Melakukan cek pada database apakah data kendaraan sudah ada dan belum keluar parkir.
+        $getKendaraan = ParkirUser::where('no_kendaraan', $no_kendaraan)->latest()->first();
+        if ($getKendaraan->status == 'Aktif') {
+                session()->flash('belumKeluar', 'Kendaraan sudah terdaftar dan belum keluar');
+                return redirect()->route('user.index');
+        }
+
         if($tipe == 'Motor') {
             $tarif = "2000";
         }elseif($tipe == 'Mobil'){
@@ -64,7 +72,7 @@ class ParkirUserController extends Controller
             'merk'=>$merk,
             'tipe'=>$tipe,
             'waktu_masuk'=>$waktu_masuk,
-            'status'=>'Aktif',
+            'status'=>'aktif',
             'tarif'=>$tarif
         ]);
 

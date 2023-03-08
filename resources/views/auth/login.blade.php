@@ -8,7 +8,7 @@
     <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+        <p class="login-box-msg">Login khusus admin dan petugas</p>
 
         <form action="{{ route('login') }}" method="post">
             @csrf
@@ -40,27 +40,13 @@
                 @enderror
             </div>
             <div class="row">
-            <div class="col-8">
-                <div class="icheck-primary">
-                <input type="checkbox" id="remember" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                <label class="form-check-label" for="remember">
-                    {{ __('Remember Me') }}
-                </label>
-                </div>
-            </div>
             <!-- /.col -->
-            <div class="col-4">
+            <div class="col-12">
                 <button type="submit" class="btn btn-primary btn-block">Sign In</button>
             </div>
             <!-- /.col -->
             </div>
         </form>
-
-            @if (Route::has('password.request'))
-                <a class="btn btn-link" href="{{ route('password.request') }}">
-                    {{ __('Forgot Your Password?') }}
-                </a>
-            @endif
         </div>
     <!-- /.login-card-body -->
   </div>

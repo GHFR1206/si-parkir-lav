@@ -90,8 +90,8 @@
                       <td>{{ $data->tipe }}</td>
                       <td>{{ $data->waktu_masuk }}</td>
                       <td>
-                        <a href="#" class="btn btn-warning">Edit</a>
-                        <a href="{{ route('admin.exit.user', $data->kode_unik) }}" class="btn btn-danger">Keluar</a>
+                        <a href="#" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="{{ route('admin.exit.user', $data->kode_unik) }}" class="btn btn-danger"><i class="fa-solid fa-right-from-bracket"></i></a>
                       </td>
                     </tr>
                     @empty
