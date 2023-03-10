@@ -41,6 +41,14 @@
                 </div>
 
                 <div class="input-group mb-3">
+                    <select class="custom-select" id="inputGroupSelect04" name="role">
+                      <option selected>Pilih role akun...</option>
+                      <option value="0">Admin</option>
+                      <option value="1">Petugas</option>
+                    </select>
+                  </div>
+
+                <div class="input-group mb-3">
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required placeholder="Password" autocomplete="new-password">
                     <div class="input-group-append">
                         <div class="input-group-text">

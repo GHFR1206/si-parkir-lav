@@ -6,8 +6,8 @@ use Carbon\Carbon;
 use App\Models\ParkirUser;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Requests\UserEnterRequest;
 use App\Http\Requests\UserExitRequest;
+use App\Http\Requests\UserEnterRequest;
 
 class ParkirUserController extends Controller
 {
@@ -43,7 +43,7 @@ class ParkirUserController extends Controller
      */
     public function store(UserEnterRequest $request)
     {
-        $waktu_masuk = \Carbon\Carbon::now()->toDateTimeString();
+        $waktu_masuk = Carbon::now()->toDateTimeString();
         $kode_unik = Str::random(5);
         $no_kendaraan = $request->no_kendaraan;
         $no_kendaraan = Str::slug($no_kendaraan, '-');
@@ -90,8 +90,8 @@ class ParkirUserController extends Controller
     public function show($user)
     {
         $data = ParkirUser::getData($user);
-        $jam_masuk = \Carbon\Carbon::now()->format('H:i:s');
-        $tanggal_masuk = \Carbon\Carbon::now()->format('M d Y');
+        $jam_masuk = Carbon::now()->format('H:i:s');
+        $tanggal_masuk = Carbon::now()->format('M d Y');
         return view('parkiruser.show', compact('data','jam_masuk','tanggal_masuk'));
     }
 
@@ -137,7 +137,7 @@ class ParkirUserController extends Controller
             'status' => 'Selesai',
         ]);
         $data = ParkirUser::getData($user);
-        $tanggal_keluar = \Carbon\Carbon::now()->format('M d Y');
+        $tanggal_keluar = Carbon::now()->format('M d Y');
         return view('parkiruser.exit-show', compact('data','tanggal_keluar'));
     }
 

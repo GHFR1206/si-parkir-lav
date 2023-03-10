@@ -15,8 +15,8 @@
             </div>
             <div class="info">
               <a href="#" class="d-block">{{ Auth::user()->username }} 
-                @role('admin') <small class="text-muted">(admin)</small>@endrole
-                @role('petugas') <small class="text-muted">(petugas)</small>@endrole
+                @if(Auth::user()->role == '0') <small class="text-muted">(admin)</small>@endif
+                @if(Auth::user()->role == '1') <small class="text-muted">(petugas)</small>@endif
               </a>
             </div>
           </div>

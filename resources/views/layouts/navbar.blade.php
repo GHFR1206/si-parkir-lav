@@ -11,6 +11,9 @@
     <ul class="navbar-nav ml-auto">
       
       <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{ route('register') }}" class="nav-link"><i class="nav-icon fas fa-user-plus"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); 
         document.getElementById('logout-form').submit();" class="nav-link"><i class="nav-icon fas fa-right-from-bracket"></i></a>
       </li>
