@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ParkirUserController;
-use App\Http\Controllers\ParkirAdminController;
+use App\Http\Controllers\ParkirController;
 use App\Http\Controllers\Auth\RegisterController;
 
 /*
@@ -21,10 +21,10 @@ use App\Http\Controllers\Auth\RegisterController;
 Auth::routes();
 
 // Admin
-Route::controller(ParkirAdminController::class)->group(function () {
-    Route::resource('admin', ParkirAdminController::class)->middleware('auth');
-    Route::get('/{user}/keluar', 'update')->name('admin.exit.user')->middleware('auth');
-    Route::get('/selesai', 'data_selesai')->name('admin.data.selesai')->middleware('auth');
+Route::controller(ParkirController::class)->group(function () {
+    Route::resource('parkir', ParkirController::class)->middleware('auth');
+    Route::get('/{user}/keluar', 'update')->name('parkir.exit.user')->middleware('auth');
+    Route::get('/selesai', 'data_selesai')->name('parkir.data.selesai')->middleware('auth');
 });
 
 // User
@@ -33,4 +33,4 @@ Route::resource('user', ParkirUserController::class);
 Route::get('/', [ParkirUserController::class, 'index'])->name('home');
 Route::get('/user/{user}/keluar', [ParkirUserController::class, 'edit'])->name('user.keluar');
 
-Route::get('/register', [RegisterController::class], 'showRegistrationForm')->name('register')->middleware(['auth', 'admin']);
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register')->middleware(['admin']);

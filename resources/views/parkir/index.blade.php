@@ -1,6 +1,6 @@
 <x-app-layout title="Data Aktif" aktif="active" header="Data Kendaraan Aktif">
         <!-- Small boxes (Stat box) -->
-        <div class="row d-flex justify-content-end">
+        <div class="row d-flex justify-content-center">
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-secondary">
@@ -12,7 +12,7 @@
               <div class="icon">
                 <i class="fas fa-file-invoice-dollar"></i>
               </div>
-              <a href="{{ route('admin.data.selesai') }}" class="small-box-footer">Info lanjut <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('parkir.data.selesai') }}" class="small-box-footer">Info lanjut <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -20,14 +20,14 @@
             <!-- small box -->
             <div class="small-box bg-secondary">
               <div class="inner">
-                <h3>{{ $selesai }}</h3>
+                <h3>{{ $motor }}</h3>
 
                 <p>Motor</p>
               </div>
               <div class="icon">
                 <i class="fas fa-motorcycle"></i>
               </div>
-              <a href="{{ route('admin.data.selesai') }}" class="small-box-footer">Info lanjut <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('parkir.data.selesai') }}" class="small-box-footer">Info lanjut <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -35,14 +35,14 @@
             <!-- small box -->
             <div class="small-box bg-secondary">
               <div class="inner">
-                <h3>{{ $aktif }}</h3>
+                <h3>{{ $mobil }}</h3>
 
-                <p>Kendaraan Aktif</p>
+                <p>Mobil</p>
               </div>
               <div class="icon">
-                <i class="ion ion-android-car"></i>
+                <i class="fas fa-car"></i>
               </div>
-              <a href="#kendaraan_aktif" class="small-box-footer">Info lanjut <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('parkir.data.selesai') }}" class="small-box-footer">Info lanjut <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -50,17 +50,16 @@
             <!-- small box -->
             <div class="small-box bg-secondary">
               <div class="inner">
-                <h3>{{ $selesai }}</h3>
+                <h3>{{ $truk }}</h3>
 
-                <p>Kendaraan Selesai</p>
+                <p>Truk / Lainnya</p>
               </div>
               <div class="icon">
-                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-truck"></i>
               </div>
-              <a href="{{ route('admin.data.selesai') }}" class="small-box-footer">Info lanjut <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('parkir.data.selesai') }}" class="small-box-footer">Info lanjut <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <!-- ./col -->
         </div>
         <!-- /.row -->
         <!-- Main row -->
@@ -91,7 +90,7 @@
                       <td>{{ $data->waktu_masuk }}</td>
                       <td>
                         <a href="#" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="{{ route('admin.exit.user', $data->kode_unik) }}" class="btn btn-danger"><i class="fa-solid fa-right-from-bracket"></i></a>
+                        <a href="{{ route('parkir.exit.user', $data->kode_unik) }}" class="btn btn-danger"><i class="fa-solid fa-right-from-bracket"></i></a>
                       </td>
                     </tr>
                     @empty

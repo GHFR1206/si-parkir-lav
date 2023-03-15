@@ -26,7 +26,7 @@
               <!-- Add icons to the links using the .nav-icon class
                    with font-awesome or any other icon font library -->
                    <li class="nav-item">
-                    <a href="{{ route('admin.index') }}" class="nav-link {{ request()->routeIs('admin.index') ?  'active' : '' }}">
+                    <a href="{{ route('parkir.index') }}" class="nav-link {{ request()->routeIs('parkir.index') ?  'active' : '' }}">
                       <i class="nav-icon fas fa-solid fa-car"></i>
                       <p>
                         Data Kendaraan Aktif
@@ -34,7 +34,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ route('admin.data.selesai') }}" class="nav-link {{ request()->routeIs('admin.data.selesai') ?  'active' : '' }}">
+                    <a href="{{ route('parkir.data.selesai') }}" class="nav-link {{ request()->routeIs('parkir.data.selesai') ?  'active' : '' }}">
                       <i class="nav-icon fas fa-solid fa-check"></i>
                       <p>
                         Data Kendaraan Selesai
@@ -42,7 +42,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                   <a href="{{ route('admin.create') }}" class="nav-link {{ request()->routeIs('admin.create') ?  'active' : '' }}">
+                   <a href="{{ route('parkir.create') }}" class="nav-link {{ request()->routeIs('parkir.create') ?  'active' : '' }}">
                      <i class="nav-icon fas fa-solid fa-plus"></i>
                      <p>
                        Tambah Data Parkir

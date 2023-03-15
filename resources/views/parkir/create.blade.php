@@ -9,7 +9,7 @@
         <div class="card">
           <div class="card-body register-card-body">
             <p class="login-box-msg">Daftarkan kendaraan user disini</p>
-            <form action="{{ route('admin.store') }}" method="POST">
+            <form action="{{ route('parkir.store') }}" method="POST">
               @csrf
               @include('layouts._form')
             </form>

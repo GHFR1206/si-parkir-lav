@@ -69,7 +69,7 @@
                       <td>Rp. {{ number_format($data->tarif) }}-</td>
                       @can('hapus')
                         <td>
-                        <a href="{{ route('admin.exit.user', $data->kode_unik) }}" class="btn btn-danger">Keluar</a>
+                        <a href="{{ route('parkir.exit.user', $data->kode_unik) }}" class="btn btn-danger">Keluar</a>
                       </td>
                       @endcan
                       

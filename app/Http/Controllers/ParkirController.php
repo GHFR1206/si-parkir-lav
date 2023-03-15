@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
-class ParkirAdminController extends Controller
+class ParkirController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +19,13 @@ class ParkirAdminController extends Controller
     public function index()
     {
         $aktif = ParkirUser::where('status', 'aktif')->get()->count();
+        $motor = ParkirUser::where(['status' => 'aktif', 'tipe' => 'Motor'])->get()->count();
+        $mobil = ParkirUser::where(['status' => 'aktif', 'tipe' => 'Mobil'])->get()->count();
+        $truk = ParkirUser::where(['status' => 'aktif', 'tipe' => 'Truk'])->get()->count();
         $selesai = ParkirUser::where('status', 'selesai')->get()->count();
         $dataaktifs = ParkirUser::where('status', 'aktif')->paginate('7');
         $pendapatan = ParkirUser::sum('tarif');
-        return view('parkiradmin.index', compact('aktif', 'dataaktifs', 'selesai', 'pendapatan'));
+        return view('parkir.index', compact('aktif', 'dataaktifs', 'selesai', 'pendapatan', 'motor', 'mobil', 'truk'));
     }
 
     public function data_selesai()
@@ -30,7 +33,7 @@ class ParkirAdminController extends Controller
         $aktif = ParkirUser::where('status', 'aktif')->get()->count();
         $selesai = ParkirUser::where('status', 'selesai')->get()->count();
         $dataselesais = ParkirUser::where('status', 'selesai')->latest()->paginate('5');
-        return view('parkiradmin.data-selesai', compact('dataselesais', 'aktif', 'selesai'));
+        return view('parkir.data-selesai', compact('dataselesais', 'aktif', 'selesai'));
     }
 
     /**
@@ -40,7 +43,7 @@ class ParkirAdminController extends Controller
      */
     public function create()
     {
-        return view('parkiradmin.create', [
+        return view('parkir.create', [
             'submit' => 'Masuk',
         ]);
     }
@@ -81,7 +84,7 @@ class ParkirAdminController extends Controller
 
         $data = ParkirUser::getData($kode_unik);
 
-        return redirect()->route('admin.index');
+        return redirect()->route('parkir.index');
     }
 
     /**
@@ -129,7 +132,7 @@ class ParkirAdminController extends Controller
             'status' => 'Selesai',
         ]);
         $data = ParkirUser::getData($user);
-        return redirect()->route('admin.index');
+        return redirect()->route('parkir.index');
     }
 
     /**

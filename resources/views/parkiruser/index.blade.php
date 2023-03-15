@@ -13,7 +13,7 @@
                   @endif
                 <form action="{{ route('user.store') }}" method="POST">
                   @csrf
-                  @include('layouts._form')
+                @include('layouts._form')
                 </form>
               </div>
               <!-- /.form-box -->
