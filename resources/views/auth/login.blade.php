@@ -10,6 +10,12 @@
         <div class="card-body login-card-body">
         <p class="login-box-msg">Login khusus admin dan petugas</p>
 
+        @error('auth.failed')
+            <div class="alert alert-danger" role="alert">
+                {{ $message }}
+            </div>
+        @enderror
+
         <form action="{{ route('login') }}" method="post">
             @csrf
             <div class="input-group mb-3">

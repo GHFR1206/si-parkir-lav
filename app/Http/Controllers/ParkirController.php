@@ -45,6 +45,7 @@ class ParkirController extends Controller
     {
         return view('parkir.create', [
             'submit' => 'Masuk',
+            'parkir' => null
         ]);
     }
 
@@ -54,7 +55,7 @@ class ParkirController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, ParkirUser $parking)
     {
         $waktu_masuk = \Carbon\Carbon::now()->toDateTimeString();
         $kode_unik = Str::random(5);
@@ -72,7 +73,16 @@ class ParkirController extends Controller
             $tarif = "5000";
         }
 
-        ParkirUser::create([
+        // Melakukan cek pada database apakah data kendaraan sudah ada dan belum keluar parkir.
+        $getKendaraan = ParkirUser::where('no_kendaraan', $no_kendaraan)->latest()->first();
+        if($getKendaraan != null){
+            if ($getKendaraan->status == 'Aktif') {
+                $parkir = 'belumKeluar';
+                return view('parkir.create', compact('parkir'));
+            }
+        }
+
+        $parkir = $parking->create([
             'kode_unik' => $kode_unik,
             'no_kendaraan'=>$no_kendaraan,
             'merk'=>$merk,
@@ -83,8 +93,9 @@ class ParkirController extends Controller
         ]);
 
         $data = ParkirUser::getData($kode_unik);
+        $submit = 'Masuk';
 
-        return redirect()->route('parkir.index');
+        return view('parkir.create', compact('data', 'parkir', 'waktu_masuk', 'kode_unik'));
     }
 
     /**

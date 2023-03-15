@@ -13,7 +13,7 @@ class CreateParkirUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('parkir_users', function (Blueprint $table) {
+        Schema::create('parkirs', function (Blueprint $table) {
             $table->id();
             $table->string('kode_unik')->unique();
             $table->string('no_kendaraan', 10);

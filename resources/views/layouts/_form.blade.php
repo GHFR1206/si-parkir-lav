@@ -68,7 +68,7 @@
   <div class="row">
     <!-- /.col -->
     <div class="col-12">
-      <button type="submit" class="btn btn-primary btn-block">{{ $submit }}</button>
+      <button type="submit" class="btn btn-primary btn-block">Masuk</button>
     </div>
     <!-- /.col -->
   </div>
