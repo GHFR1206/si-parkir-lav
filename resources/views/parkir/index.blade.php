@@ -66,7 +66,11 @@
         <div class="row">
           <!-- Tabel Kendaraan Aktif -->
           <div class="col-12 mb-5">
-            <div class="card">
+            <div class="card text-center">
+              <div class="card-header">
+                <h3 class="card-title">Aktif : {{ $aktif }}</h3>
+                <p class="text-right mb-n2"><span id="tanggal"></span> ; <span id="watch"></span></p>
+              </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
@@ -89,7 +93,9 @@
                       <td>{{ $data->tipe }}</td>
                       <td>{{ $data->waktu_masuk }}</td>
                       <td>
-                        <a href="#" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                        @if (Auth::user()->role == 0)
+                          <a href="#" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                        @endif
                         <a href="{{ route('parkir.exit.user', $data->kode_unik) }}" class="btn btn-danger"><i class="fa-solid fa-right-from-bracket"></i></a>
                       </td>
                     </tr>
