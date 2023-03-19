@@ -117,7 +117,7 @@ class ParkirController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view("parkir.edit");
     }
 
     /**
@@ -127,22 +127,39 @@ class ParkirController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $user)
+    public function update(Request $request, $parkir)
     {
-        $data = ParkirUser::getData($user);
+        
+    }
+
+    public function showParkirKeluar()
+    {
+        dd('ok');
+        return view("parkir.keluar");
+    }
+
+
+    /**
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function parkirKeluar(Request $request, $parkir)
+    {
+        $data = ParkirUser::getData($parkir);
         $waktu_keluar = \Carbon\Carbon::now()->toDateTimeString();
         $menuju = Carbon::createFromFormat('Y-m-d H:i:s', $waktu_keluar);
         $dari = Carbon::createFromFormat('Y-m-d H:i:s', $data->waktu_masuk);
         $selisihJam = $menuju->diffInHours($dari);
         $tarif = $data->tarif * $selisihJam;
 
-        ParkirUser::where('kode_unik', $user)->update([
+        ParkirUser::where('kode_unik', $parkir)->update([
             'waktu_masuk' => $data->waktu_masuk,
             'waktu_keluar' => $waktu_keluar,
             'tarif' => $tarif,
             'status' => 'Selesai',
         ]);
-        $data = ParkirUser::getData($user);
+        $data = ParkirUser::getData($parkir);
         return redirect()->route('parkir.index');
     }
 

@@ -20,18 +20,18 @@ use App\Http\Controllers\Auth\RegisterController;
 */
 
 Auth::routes();
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register')->middleware(['admin', 'auth']);
 
 // Admin
-Route::controller(ParkirController::class)->group(function () {
-    Route::resource('parkir', ParkirController::class)->middleware('auth');
-    Route::get('/{user}/keluar', 'update')->name('parkir.exit.user')->middleware('auth');
-    Route::get('/selesai', 'data_selesai')->name('parkir.data.selesai')->middleware('auth');
+Route::controller(ParkirController::class)->middleware('auth')->group(function () {
+    Route::resource('parkir', ParkirController::class);
+    Route::get('/{parkir}/keluar', 'parkirKeluar')->name('parkir.update.keluar');
+    Route::get('/selesai', 'data_selesai')->name('parkir.data.selesai');
+    Route::get('/parkir/keluar', 'showParkirKeluar')->name('parkir.keluar');
 });
 
 // User
 Route::resource('user', ParkirUserController::class);
-
 Route::get('/', [ParkirUserController::class, 'index'])->name('home');
 Route::get('/user/{user}/keluar', [ParkirUserController::class, 'edit'])->name('user.keluar');
 
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register')->middleware(['admin', 'auth']);

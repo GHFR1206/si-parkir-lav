@@ -1,11 +1,11 @@
-<x-app-layout title="Register Kendaraan" tambah="active">
+<x-app-layout title="Keluar Parkir">
 
   <div class="container-fluid mt-n4">
     <div class="row justify-content-center">
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    @include('layouts._card-navbar')
+                  @include('layouts._card-navbar')
                 </div>
 
                 <div class="card-body">

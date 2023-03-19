@@ -53,7 +53,7 @@ class ParkirUserController extends Controller
 
         // Melakukan cek pada database apakah data kendaraan sudah ada dan belum keluar parkir.
         $getKendaraan = ParkirUser::where('no_kendaraan', $no_kendaraan)->latest()->first();
-        if ($getKendaraan->status == 'Aktif') {
+        if ($getKendaraan->status == 'aktif') {
                 session()->flash('belumKeluar', 'Kendaraan sudah terdaftar dan belum keluar');
                 return redirect()->route('user.index');
         }
