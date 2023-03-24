@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-use App\Models\ParkirUser;
+use App\Models\Parking;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidasiKodeUnik implements Rule
@@ -29,7 +29,7 @@ class ValidasiKodeUnik implements Rule
      */
     public function passes($attribute, $value)
     {
-        return ParkirUser::where('kode_unik', $value)->count();
+        return Parking::where('kode_parkir', $value)->count();
     }
 
     /**

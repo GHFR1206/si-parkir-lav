@@ -24,7 +24,7 @@ class UserEnterRequest extends FormRequest
     public function rules()
     {
         return [
-            'no_kendaraan' => ['required'],
+            'no_kendaraan' => ['required', 'max:12'],
             'merk' => ['required'],
         ];
     }

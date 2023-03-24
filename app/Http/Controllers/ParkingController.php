@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\ParkirUser;
+use App\Models\Parkings;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -18,21 +18,21 @@ class ParkirController extends Controller
      */
     public function index()
     {
-        $aktif = ParkirUser::where('status', 'aktif')->get()->count();
-        $motor = ParkirUser::where(['status' => 'aktif', 'tipe' => 'Motor'])->get()->count();
-        $mobil = ParkirUser::where(['status' => 'aktif', 'tipe' => 'Mobil'])->get()->count();
-        $truk = ParkirUser::where(['status' => 'aktif', 'tipe' => 'Truk'])->get()->count();
-        $selesai = ParkirUser::where('status', 'selesai')->get()->count();
-        $dataaktifs = ParkirUser::where('status', 'aktif')->paginate('7');
-        $pendapatan = ParkirUser::sum('tarif');
+        $aktif = Parkings::where('status', 'aktif')->get()->count();
+        $motor = Parkings::where(['status' => 'aktif', 'tipe' => 'Motor'])->get()->count();
+        $mobil = Parkings::where(['status' => 'aktif', 'tipe' => 'Mobil'])->get()->count();
+        $truk = Parkings::where(['status' => 'aktif', 'tipe' => 'Truk'])->get()->count();
+        $selesai = Parkings::where('status', 'selesai')->get()->count();
+        $dataaktifs = Parkings::where('status', 'aktif')->paginate('7');
+        $pendapatan = Parkings::sum('tarif');
         return view('parkir.index', compact('aktif', 'dataaktifs', 'selesai', 'pendapatan', 'motor', 'mobil', 'truk'));
     }
 
     public function data_selesai()
     {
-        $aktif = ParkirUser::where('status', 'aktif')->get()->count();
-        $selesai = ParkirUser::where('status', 'selesai')->get()->count();
-        $dataselesais = ParkirUser::where('status', 'selesai')->latest()->paginate('5');
+        $aktif = Parkings::where('status', 'aktif')->get()->count();
+        $selesai = Parkings::where('status', 'selesai')->get()->count();
+        $dataselesais = Parkings::where('status', 'selesai')->latest()->paginate('5');
         return view('parkir.data-selesai', compact('dataselesais', 'aktif', 'selesai'));
     }
 
@@ -55,7 +55,7 @@ class ParkirController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, ParkirUser $parking)
+    public function store(Request $request, Parkings $parking)
     {
         $waktu_masuk = \Carbon\Carbon::now()->toDateTimeString();
         $kode_unik = Str::random(5);
@@ -74,7 +74,7 @@ class ParkirController extends Controller
         }
 
         // Melakukan cek pada database apakah data kendaraan sudah ada dan belum keluar parkir.
-        $getKendaraan = ParkirUser::where('no_kendaraan', $no_kendaraan)->latest()->first();
+        $getKendaraan = Parkings::where('no_kendaraan', $no_kendaraan)->latest()->first();
         if($getKendaraan != null){
             if ($getKendaraan->status == 'Aktif') {
                 $parkir = 'belumKeluar';
@@ -92,7 +92,7 @@ class ParkirController extends Controller
             'tarif'=>$tarif
         ]);
 
-        $data = ParkirUser::getData($kode_unik);
+        $data = Parkings::getData($kode_unik);
         $submit = 'Masuk';
 
         return view('parkir.create', compact('data', 'parkir', 'waktu_masuk', 'kode_unik'));
@@ -146,20 +146,20 @@ class ParkirController extends Controller
      */
     public function parkirKeluar(Request $request, $parkir)
     {
-        $data = ParkirUser::getData($parkir);
+        $data = Parkings::getData($parkir);
         $waktu_keluar = \Carbon\Carbon::now()->toDateTimeString();
         $menuju = Carbon::createFromFormat('Y-m-d H:i:s', $waktu_keluar);
         $dari = Carbon::createFromFormat('Y-m-d H:i:s', $data->waktu_masuk);
         $selisihJam = $menuju->diffInHours($dari);
         $tarif = $data->tarif * $selisihJam;
 
-        ParkirUser::where('kode_unik', $parkir)->update([
+        Parkings::where('kode_unik', $parkir)->update([
             'waktu_masuk' => $data->waktu_masuk,
             'waktu_keluar' => $waktu_keluar,
             'tarif' => $tarif,
             'status' => 'Selesai',
         ]);
-        $data = ParkirUser::getData($parkir);
+        $data = Parkings::getData($parkir);
         return redirect()->route('parkir.index');
     }
 

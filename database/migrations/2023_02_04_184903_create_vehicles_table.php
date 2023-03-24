@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateParkirUsersTable extends Migration
+class CreateVehiclesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,11 @@ class CreateParkirUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('parkirs', function (Blueprint $table) {
-            $table->id();
-            $table->string('kode_unik')->unique();
+        Schema::create('vehicles', function (Blueprint $table) {
+            $table->id('vehicle_id');
             $table->string('no_kendaraan', 10);
             $table->string('merk');
             $table->string('tipe');
-            $table->timestamp('waktu_masuk');
-            $table->timestamp('waktu_keluar')->nullable();
-            $table->integer('tarif')->nullable();
-            $table->string('status');
             $table->timestamps();
         });
     }
@@ -34,6 +29,6 @@ class CreateParkirUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('parkir_users');
+        Schema::dropIfExists('vehicles');
     }
 }

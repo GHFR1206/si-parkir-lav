@@ -25,7 +25,7 @@ class UserExitRequest extends FormRequest
     public function rules()
     {
         return [
-            'kode_unik' => [
+            'kode_parkir' => [
                 'required',
                 new ValidasiKodeUnik(),
             ],
