@@ -18,8 +18,8 @@ class CreateParkingsTable extends Migration
             $table->string('kode_parkir')->unique();
             $table->unsignedBigInteger('vehicle_id');
             $table->string('petugas');
-            $table->timestamp('waktu_masuk');
-            $table->timestamp('waktu_keluar')->nullable();
+            $table->dateTime('waktu_masuk');
+            $table->dateTime('waktu_keluar')->nullable();
             $table->integer('tarif')->nullable();
             $table->string('status');
             $table->timestamps();

@@ -14,6 +14,7 @@ class Parking extends Model
         'waktu_masuk',
         'waktu_keluar',
         'tarif',
+        'petugas',
         'status',
     ];
 

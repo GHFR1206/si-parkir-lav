@@ -1,64 +1,67 @@
 <x-app-layout title="Login">
-    <div class="container mt-5">
-        <div class="row justify-content-center mt-5">
+    <div class="container mt-5 mb-n5">
+        <div class="row justify-content-center mt-5 mb-n5">
             <div class="login-box">
                 <div class="login-logo">
                     <a href="{{ route('home') }}"><b>GHFR</b>ParkNet.Id</a>
                 </div>
-    <!-- /.login-logo -->
-    <div class="card">
-        <div class="card-body login-card-body">
-        <p class="login-box-msg">Login khusus admin dan petugas</p>
+                <!-- /.login-logo -->
+                <div class="card">
+                    <div class="card-body login-card-body">
+                        <p class="login-box-msg">Login khusus admin dan petugas</p>
 
-        @error('auth.failed')
-            <div class="alert alert-danger" role="alert">
-                {{ $message }}
-            </div>
-        @enderror
+                        @error('auth.failed')
+                            <div class="alert alert-danger" role="alert">
+                                {{ $message }}
+                            </div>
+                        @enderror
 
-        <form action="{{ route('login') }}" method="post">
-            @csrf
-            <div class="input-group mb-3">
-                <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" placeholder="Username" value="{{ old('username') }}" autocomplete="username" autofocus>
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-envelope"></span>
+                        <form action="{{ route('login') }}" method="post">
+                            @csrf
+                            <div class="input-group mb-3">
+                                <input type="text" name="username"
+                                    class="form-control @error('username') is-invalid @enderror" placeholder="Username"
+                                    value="{{ old('username') }}" autocomplete="username" autofocus>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-envelope"></span>
+                                    </div>
+                                </div>
+                                @error('username')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                    name="password" autocomplete="current-password" placeholder="Password">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
+                                    </div>
+                                </div>
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="row">
+                                <!-- /.col -->
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                        </form>
                     </div>
+                    <!-- /.login-card-body -->
                 </div>
-                @error('username')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
             </div>
-
-            <div class="input-group mb-3">
-                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="current-password" placeholder="Password">
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-lock"></span>
-                    </div>
-                </div>
-                @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-            <div class="row">
-            <!-- /.col -->
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-            </div>
-            <!-- /.col -->
-            </div>
-        </form>
         </div>
-    <!-- /.login-card-body -->
-  </div>
-</div>
-</div>
-</div>
+    </div>
 </x-app-layout>
 
 

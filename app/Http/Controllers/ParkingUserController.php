@@ -52,10 +52,12 @@ class ParkingUserController extends Controller
         // Melakukan cek pada database apakah data kendaraan sudah ada dan belum keluar parkir.
         $getVehicle = Vehicle::where('no_kendaraan', str_replace(' ', '', strtoupper($request->no_kendaraan)))->latest()->first();
         if ($getVehicle) {
-            $data = Parking::with('vehicle')->where('vehicle_id', $getVehicle->id)->first();
+            $data = Parking::with('vehicle')->where('vehicle_id', $getVehicle->vehicle_id)->first();
             if ($data->status == 'Aktif') {
-                $parkir = 'belumKeluar';
-                return view('parkiruser.index', compact('parkir'));
+                $data = $data;
+                $jam_masuk = Carbon::parse($data->waktu_masuk)->format('H:i:s');
+                $tanggal_masuk = Carbon::now()->format('M d Y');
+                return view('parkiruser.show', compact('data', 'jam_masuk', 'tanggal_masuk'));
             }
         }
 
@@ -86,11 +88,18 @@ class ParkingUserController extends Controller
             'merk' => $request->merk
         ]);
 
+        if (Auth::guest()) {
+            $petugas = 'user';
+        } else {
+            $petugas = Auth::user()->id;
+        }
+
         $parkir = Parking::create([
             'kode_parkir' => $kode_parkir,
-            'vehicle_id' => $pengendara->id,
+            'vehicle_id' => $pengendara->vehicle_id,
             'waktu_masuk' => $waktu_masuk,
             'status' => 'Aktif',
+            'petugas' => $petugas,
             'tarif' => $tarif
         ]);
 
@@ -106,7 +115,7 @@ class ParkingUserController extends Controller
     public function show($user)
     {
         $data = Parking::where('kode_parkir', $user)->with('vehicle')->first();
-        $jam_masuk = Carbon::now()->format('H:i:s');
+        $jam_masuk = Carbon::parse($data->waktu_masuk)->format('H:i:s');
         $tanggal_masuk = Carbon::now()->format('M d Y');
         return view('parkiruser.show', compact('data', 'jam_masuk', 'tanggal_masuk'));
     }
@@ -159,9 +168,8 @@ class ParkingUserController extends Controller
                 if (Auth::guest()) {
                     $petugas = 'user';
                 } else {
-                    $petugas = Auth::user()->user_id;
+                    $petugas = Auth::user()->id;
                 }
-
 
                 //update data ke tabel parking
                 $data->update([
@@ -173,7 +181,10 @@ class ParkingUserController extends Controller
             }
         };
 
-        return view('parkiruser.exit-show', compact('data', 'tanggal_keluar', 'hasil_rupiah'));
+        $jam_masuk = Carbon::parse($data->waktu_masuk)->format('H:i:s');
+        $jam_keluar = Carbon::parse($data->waktu_keluar)->format('H:i:s');
+
+        return view('parkiruser.exit-show', compact('data', 'tanggal_keluar', 'hasil_rupiah', 'jam_masuk', 'jam_keluar'));
     }
 
     /**

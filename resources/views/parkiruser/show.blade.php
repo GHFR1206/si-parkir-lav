@@ -1,5 +1,5 @@
- <x-app-layout>
-     <div class="container mt-0">
+ <x-app-login title="Informasi Parkir">
+     <div class="container mt-3">
          <div class="row justify-content-center">
              <div class="card text-center col-8">
                  <div class="card-header">
@@ -28,4 +28,4 @@
              </div>
          </div>
      </div>
- </x-app-layout>
+ </x-app-login>

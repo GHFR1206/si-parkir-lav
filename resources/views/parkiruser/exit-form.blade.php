@@ -1,6 +1,6 @@
-<x-app-layout title="Register Kendaraan">
-    <div class="container mt-5">
-        <div class="row justify-content-center mt-5">
+<x-app-login title="Kode Keluar">
+    <div class="container">
+        <div class="row justify-content-center">
             <div class="register-box">
                 <div class="register-logo">
                     <a href="#"><b>GHFR</b>ParkNet.Id</a>
@@ -44,4 +44,4 @@
             <!-- /.register-box -->
         </div>
     </div>
-</x-app-layout>
+</x-app-login>

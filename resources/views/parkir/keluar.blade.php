@@ -1,65 +1,93 @@
 <x-app-layout title="Keluar Parkir">
 
-  <div class="container-fluid mt-n4">
-    <div class="row justify-content-center">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                  @include('layouts._card-navbar')
-                </div>
+    <div class="container-fluid mt-n4">
+        <div class="row justify-content-center">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        @include('layouts._card-navbar')
+                    </div>
 
-                <div class="card-body">
-                    <div class="row icon-examples">
-                        <div class="col-lg">
-                            <div class="card-group">
-                                <div class="col-lg-6">
-                                    <div class="card" style="height: 28rem;">
-                                        <div class="card-header">
-                                            <h5 class="card-title mb-0">Input Kendaraan Masuk</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="container h-100">
-                                                <div class="row align-items-center h-100">
-                                                    <div class="col mx-auto">
-                                                      <form action="{{ route('parkir.store') }}" method="POST">
-                                                        @csrf
-                                                        @include('layouts._form')
-                                                      </form>
+                    <div class="card-body">
+                        <div class="row icon-examples">
+                            <div class="col-lg">
+                                <div class="card-group">
+                                    <div class="col-lg-6">
+                                        <div class="card" style="height: 28rem;">
+                                            <div class="card-header">
+                                                <h5 class="card-title mb-0">Kendaraan Keluar</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="container h-100">
+                                                    <div class="row align-items-center h-100">
+                                                        <div class="col mx-auto">
+                                                            <form action="{{ route('parkir.update.keluar') }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <div class="input-group mb-3">
+                                                                    <input type="text"
+                                                                        class="form-control @error('kode_parkir') is-invalid @enderror"
+                                                                        name="kode_parkir" id="kode_parkir"
+                                                                        placeholder="Masukkan Kode Parkir Untuk Keluar"
+                                                                        autocomplete="off">
+                                                                    <div class="input-group-append">
+                                                                        <div class="input-group-text">
+                                                                        </div>
+                                                                    </div>
+                                                                    @error('kode_parkir')
+                                                                        <span
+                                                                            class="invalid-feedback">{{ $message }}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="card" style="height: 28rem;">
-                                        <div class=" card-header">
-                                            <h5 class="card-title mb-0">Tiket parkir</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="container h-100">
-                                                <div class="row align-items-center h-100">
-                                                    <div class="col mx-auto">
-                                                        @if($parkir == 'belumKeluar')
-                                                        <div class="col-lg text-center">
-                                                            <h3>NOMOR POLISI KENDARAAN SUDAH MASUK TEMPAT PARKIR DAN BELUM KELUAR</h3>
+                                    <div class="col-lg-6">
+                                        <div class="card" style="height: 28rem;">
+                                            <div class=" card-header">
+                                                <h5 class="card-title mb-0">Tiket parkir</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="container h-100">
+                                                    <div class="row align-items-center h-100">
+                                                        <div class="col mx-auto">
+                                                            @if ($parkir == 'belumKeluar')
+                                                                <div class="col-lg text-center">
+                                                                    <h3>NOMOR POLISI KENDARAAN SUDAH MASUK TEMPAT PARKIR
+                                                                        DAN BELUM KELUAR</h3>
+                                                                </div>
+                                                            @elseif($parkir)
+                                                                <div class=" container text-center p-0">
+                                                                    <h5>Tiket Parkir</h5>
+                                                                    <br>
+                                                                    <p class="p-0"
+                                                                        style="margin-top: -12px !important; font-size:10px">
+                                                                        Thamrin Office Park AA03 Jl. Boulevard, Jl.
+                                                                        Teluk Betung, RT.11/RW.9, Kb. Melati, Kecamatan
+                                                                        Tanah Abang , Daerah Khusus Ibukota Jakarta,
+                                                                        10240.</p>
+                                                                    <p class="mt-1">{{ $waktu_masuk }}</p>
+                                                                    <h5 style="margin-top: -6px;">KODE PARKIR : </h5>
+                                                                    <p style="margin-top: -9px;font-size:30px;">
+                                                                        {{ $kode_unik }}</p>
+                                                                    <p class="mt-2" style="font-size:10px;">1.
+                                                                        KERUSAKAN & KEHILANGAN BARANG DALAM KENDARAAN
+                                                                        JADI TANGGUNG JAWAB PEMILIK (TIDAK ADA
+                                                                        PENGGANTIAN) <br>
+                                                                        2. BERLAKU 1X (SATU KALI) PARKIR</p>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-lg text-center">
+                                                                    <h3>SILAHKAN INPUT KENDARAAN MASUK UNTUK MENDAPATKAN
+                                                                        TIKET PARKIR</h3>
+                                                                </div>
+                                                            @endif
                                                         </div>
-                                                        @elseif($parkir)
-                                                        <div class=" container text-center p-0">
-                                                            <h5>Tiket Parkir</h5>
-                                                            <br>
-                                                            <p class="p-0" style="margin-top: -12px !important; font-size:10px">Thamrin Office Park AA03 Jl. Boulevard, Jl. Teluk Betung, RT.11/RW.9, Kb. Melati, Kecamatan Tanah Abang , Daerah Khusus Ibukota Jakarta, 10240.</p>
-                                                            <p class="mt-1">{{$waktu_masuk}}</p>
-                                                            <h5 style="margin-top: -6px;">KODE PARKIR : </h5>
-                                                            <p style="margin-top: -9px;font-size:30px;">{{$kode_unik}}</p>
-                                                            <p class="mt-2" style="font-size:10px;">1. KERUSAKAN & KEHILANGAN BARANG DALAM KENDARAAN JADI TANGGUNG JAWAB PEMILIK (TIDAK ADA PENGGANTIAN) <br>
-                                                                2. BERLAKU 1X (SATU KALI) PARKIR</p>
-                                                        </div>
-                                                        @else
-                                                        <div class="col-lg text-center">
-                                                            <h3>SILAHKAN INPUT KENDARAAN MASUK UNTUK MENDAPATKAN TIKET PARKIR</h3>
-                                                        </div>
-                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -73,7 +101,6 @@
             </div>
         </div>
     </div>
-</div>
 </x-app-layout>
 
 {{-- 

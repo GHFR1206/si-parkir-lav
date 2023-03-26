@@ -1,78 +1,74 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ $title }} | GHFRParkNet.Id</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ $title }} | GHFRParkNet.Id</title>
 
-  <!-- CSRF Token -->
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  @include('includes.styles')
+    @include('include._styles')
 
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
-<div class="wrapper">
+    <div class="wrapper">
 
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{ asset('img/logo.png') }}" alt="AdminLTELogo" height="100" width="100">
-  </div>
+        <!-- Preloader -->
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="{{ asset('img/logo.png') }}" alt="AdminLTELogo" height="100"
+                width="100">
+        </div>
 
-  @guest
-        @if (Route::has('login'))
-
-  @endif
+        @guest
+            @if (Route::has('login'))
+            @endif
         @else
-        <!-- Navbar -->
-          <x-navbar></x-navbar>
-        <!-- /.navbar -->
+            <!-- Navbar -->
+            <x-navbar></x-navbar>
+            <!-- /.navbar -->
 
-        <!-- Main Sidebar Container -->
-          <x-sidebar aktif="{{ $aktif }}" selesai="{{ $selesai }}" tambah="{{ $tambah }}"></x-sidebar>
-        <!-- /.Main Sidebar Container -->
-    @endguest
+            <!-- Main Sidebar Container -->
+            <x-sidebar aktif="{{ $aktif }}" selesai="{{ $selesai }}" tambah="{{ $tambah }}"></x-sidebar>
+            <!-- /.Main Sidebar Container -->
+        @endguest
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">{{ $header }}</h1>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">{{ $header }}</h1>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    {{ $slot }}
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
     </div>
-    <!-- /.content-header -->
+    <!-- ./wrapper -->
 
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-            {{ $slot }}
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+    <footer>
+        @include('layouts.footer')
+    </footer>
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-    tes
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
-
-<footer>
-  @include('layouts.footer')
-</footer>
-
-@include('includes.scripts')
+    @include('include._scripts')
 
 </body>
+
 </html>
 
 
