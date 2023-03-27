@@ -25,7 +25,6 @@ class UserEnterRequest extends FormRequest
     {
         return [
             'no_kendaraan' => ['required', 'max:12'],
-            'merk' => ['required'],
         ];
     }
 }

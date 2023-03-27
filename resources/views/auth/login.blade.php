@@ -1,6 +1,6 @@
-<x-app-layout title="Login">
-    <div class="container mt-5 mb-n5">
-        <div class="row justify-content-center mt-5 mb-n5">
+<x-app-login title="Login">
+    <div class="container">
+        <div class="row justify-content-center">
             <div class="login-box">
                 <div class="login-logo">
                     <a href="{{ route('home') }}"><b>GHFR</b>ParkNet.Id</a>
@@ -62,7 +62,7 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-app-login>
 
 
 {{-- <x-app-layout title="Login">

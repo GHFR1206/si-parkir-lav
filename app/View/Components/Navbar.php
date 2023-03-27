@@ -25,6 +25,6 @@ class Navbar extends Component
      */
     public function render()
     {
-        return view('layouts.navbar');
+        return view('layouts._navbar');
     }
 }

@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-12">
                     <h2 class="page-header">
-                        <i class="fas fa-globe"></i> GHFRParkNet.Id
+                        GHFRParkNet.Id
                         <p><small class="float-right">Date: {{ $tanggal_masuk }}</small></p>
                     </h2>
                 </div>

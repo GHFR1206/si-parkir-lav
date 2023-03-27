@@ -55,7 +55,7 @@ class ParkingController extends Controller
         $submit = 'Masuk';
         $export = null;
         $parkir = null;
-        return view('parkir.create', compact('submit', 'export', 'parkir'));
+        return view('parkir.masuk', compact('submit', 'export', 'parkir'));
     }
 
     /**
@@ -82,7 +82,7 @@ class ParkingController extends Controller
                 $tanggal_masuk = Carbon::now()->format('M d Y');
                 $parkir = 'belumKeluar';
                 $export = null;
-                return view('parkir.create', compact('data', 'jam_masuk', 'tanggal_masuk', 'parkir', 'export'));
+                return view('parkir.masuk', compact('data', 'jam_masuk', 'tanggal_masuk', 'parkir', 'export'));
             }
         }
 
@@ -114,7 +114,6 @@ class ParkingController extends Controller
             $pengendara = Vehicle::create([
                 'no_kendaraan' => str_replace(' ', '', strtoupper($request->no_kendaraan)),
                 'tipe' => $request->tipe,
-                'merk' => $request->merk
             ]);
             $vehicle = $pengendara->vehicle_id;
         }
@@ -132,7 +131,7 @@ class ParkingController extends Controller
         $submit = 'Masuk';
         $export = true;
 
-        return view('parkir.create', compact('parkir', 'submit', 'export'));
+        return view('parkir.masuk', compact('parkir', 'submit', 'export'));
     }
 
     /**
@@ -182,19 +181,7 @@ class ParkingController extends Controller
         //
     }
 
-    public function data_selesai()
-    {
-        $selesai = Parking::with('vehicle')->where('status', 'Keluar')->get()->count();
-        return view('parkir.data-selesai', compact('selesai'));
-    }
-
-    public function showParkirKeluar()
-    {
-        dd('ok');
-        return view("parkir.keluar");
-    }
-
-    public function parkirKeluar(Request $request, $parkir)
+    public function keluar(Request $request, $parkir)
     {
 
         $getParkir = Parking::where('kode_parkir', $parkir)->first();
@@ -226,5 +213,60 @@ class ParkingController extends Controller
             'getParkir' => $getParkir,
             'hasil_rupiah' => $hasil_rupiah,
         ]);
+    }
+
+    public function data_selesai()
+    {
+        $selesai = Parking::with('vehicle')->where('status', 'Keluar')->get()->count();
+        return view('parkir.data-selesai', compact('selesai'));
+    }
+
+    public function parkirKeluar(Request $request)
+    {
+        //query tabel parkir sesuai dengan kode dari request
+
+        $getParkir = Parking::with('vehicle')->where('kode_parkir', $request->kode_parkir)->first();
+
+        if ($getParkir) {
+            //validasi kode parkir apakah kode sudah pernah dipakai atau tidak
+            if ($getParkir->status == 'Keluar') {
+                $parkir = 'keluar';
+                $export = null;
+                return view('parkir.keluar', compact('getParkir', 'parkir', 'export'));
+            } else {
+                //jika kode parkir sesuai, menghitung selisih jam masuk ke jam keluar sekaligus menentukan tarif
+                $waktu_keluar = Carbon::now()->setTimezone('Asia/Jakarta');
+                $keluar = strtotime($waktu_keluar);
+                $waktu_masuk = strtotime($getParkir->waktu_masuk);
+
+                $diff = $keluar - $waktu_masuk;
+                if (floor($diff / (60 * 60)) == 0.0) {
+                    $tarif = $getParkir->tarif;
+                } else {
+                    $jam = floor($diff / (60 * 60));
+                    $tarif  = $getParkir->tarif * ceil($jam);
+                }
+                $hasil_rupiah = "Rp " . number_format($tarif, 0, ',', '. ');
+
+                //update data ke tabel parking
+                $getParkir->update([
+                    'waktu_keluar' => $waktu_keluar,
+                    'tarif' => $tarif,
+                    'petugas' => Auth::user()->id,
+                    'status' => 'Keluar'
+                ]);
+                $parkir = 'bayar';
+                $export = true;
+                return view('parkir.keluar', compact('getParkir', 'parkir', 'hasil_rupiah', 'export'));
+            }
+        } else if ($request->kode_parkir) {
+            $parkir = 'notCode';
+            $export = null;
+            return view('parkir.keluar', compact('getParkir', 'parkir', 'export'));
+        } else {
+            $parkir = null;
+            $export = null;
+            return view('parkir.keluar', compact('getParkir', 'parkir', 'export'));
+        }
     }
 }

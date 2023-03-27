@@ -4,7 +4,7 @@
             href="{{ route('parkir.create') }}">Parkir Masuk</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('parkir.keluar') ? 'active' : '' }}"
-            href={{ route('parkir.keluar') }}>Parkir Keluar</a>
+        <a class="nav-link {{ request()->routeIs('parkir.getKeluar') ? 'active' : '' }}"
+            href={{ route('parkir.getKeluar') }}>Parkir Keluar</a>
     </li>
 </ul>

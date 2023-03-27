@@ -85,7 +85,6 @@ class ParkingUserController extends Controller
         $pengendara = Vehicle::create([
             'no_kendaraan' => str_replace(' ', '', strtoupper($request->no_kendaraan)),
             'tipe' => $request->tipe,
-            'merk' => $request->merk
         ]);
 
         if (Auth::guest()) {
@@ -116,7 +115,7 @@ class ParkingUserController extends Controller
     {
         $data = Parking::where('kode_parkir', $user)->with('vehicle')->first();
         $jam_masuk = Carbon::parse($data->waktu_masuk)->format('H:i:s');
-        $tanggal_masuk = Carbon::now()->format('M d Y');
+        $tanggal_masuk = Carbon::parse($data->waktu_masuk)->format('d/m/y');
         return view('parkiruser.show', compact('data', 'jam_masuk', 'tanggal_masuk'));
     }
 

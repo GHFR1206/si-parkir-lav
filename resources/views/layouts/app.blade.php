@@ -9,7 +9,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    @include('include._styles')
+    @include('includes._styles')
 
 </head>
 
@@ -31,7 +31,7 @@
             <!-- /.navbar -->
 
             <!-- Main Sidebar Container -->
-            <x-sidebar aktif="{{ $aktif }}" selesai="{{ $selesai }}" tambah="{{ $tambah }}"></x-sidebar>
+            <x-sidebar></x-sidebar>
             <!-- /.Main Sidebar Container -->
         @endguest
 
@@ -62,10 +62,10 @@
     <!-- ./wrapper -->
 
     <footer>
-        @include('layouts.footer')
+        @include('includes._footer')
     </footer>
 
-    @include('include._scripts')
+    @include('includes._scripts')
 
 </body>
 

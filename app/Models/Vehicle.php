@@ -9,7 +9,7 @@ class Vehicle extends Model
 {
     protected $primaryKey = 'vehicle_id';
     protected $fillable = [
-        'id', 'no_kendaraan', 'tipe', 'merk'
+        'id', 'no_kendaraan', 'tipe',
     ];
 
     public function parking()

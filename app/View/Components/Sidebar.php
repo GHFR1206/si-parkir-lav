@@ -12,9 +12,9 @@ class Sidebar extends Component
      * @return void
      */
 
-     public $aktif;
-     public $selesai;
-     public $tambah;
+    public $aktif;
+    public $selesai;
+    public $tambah;
     public function __construct($aktif = null, $selesai = null, $tambah = null)
     {
         $this->aktif = $aktif;
@@ -29,6 +29,6 @@ class Sidebar extends Component
      */
     public function render()
     {
-        return view('layouts.sidebar');
+        return view('layouts._sidebar');
     }
 }

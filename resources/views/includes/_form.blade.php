@@ -22,30 +22,6 @@
     @enderror
 </div>
 
-<div class="input-group mb-3">
-    <input type="text" class="form-control @error('merk') is-invalid @enderror" id="merk" name="merk"
-        value="{{ old('merk') }}" placeholder="Merk Kendaraan" list="cars" autocomplete="off" />
-    <datalist id="cars">
-        <option value="Yamaha">Yamaha</option>
-        <option value="Suzuki">Suzuki</option>
-        <option value="Kawasaki">Kawasaki</option>
-        <option value="Honda">Honda</option>
-        <option value="Toyota">Toyota</option>
-        <option value="BMW">BMW</option>
-        <option value="Nissan">Nissan</option>
-        <option value="Volkswagen">Volkswagen</option>
-        <option value="Audi">Audi</option>
-    </datalist>
-    <div class="input-group-append">
-        <div class="input-group-text">
-            <span class="fa-solid fa-copyright"></span>
-        </div>
-    </div>
-    @error('merk')
-        <span class="invalid-feedback">{{ $message }}</span>
-    @enderror
-</div>
-
 <div class="input-group ml-2 mb-3 d-flex justify-content-center">
     <div class="form-check mr-4">
         <input class="form-check-input" type="radio" name="tipe" id="motor" value="Motor" checked>

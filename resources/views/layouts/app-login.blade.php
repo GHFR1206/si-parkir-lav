@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $title }} | GHFRParkNet.Id</title>
 
-    @include('include._styles')
+    @include('includes._styles')
 </head>
 
 <body class="hold-transition login-page">
 
     {{ $slot }}
-    @include('include._scripts')
+    @include('includes._scripts')
 
 </body>
 

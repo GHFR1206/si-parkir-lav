@@ -1,31 +1,42 @@
  <x-app-login title="Informasi Parkir">
-     <div class="container mt-3">
+     <div class="container mt-5">
          <div class="row justify-content-center">
-             <div class="card text-center col-8">
-                 <div class="card-header">
-                     <h6>Informasi Parkir</h6>
+             <section class="invoice col-8">
+                 <!-- title row -->
+                 <div class="row">
+                     <div class="col-12">
+                         <i class="fas fa-globe"></i> GHFRParkNet.Id
+                     </div>
+                     <!-- /.col -->
                  </div>
-                 <div class="card-body">
-                     <p>Kode Anda Adalah</p>
-                     <h4>
-                         <p><b>{{ $data->kode_parkir }}</b></p>
-                     </h4>
+
+                 <div class="container text-center p-0">
+                     <h5>Tiket Parkir</h5>
+                     <br>
+                     <p class="p-0" style="margin-top: -12px !important; font-size:10px">
+                         SMKN 1 Ciomas Jl.
+                         Raya Laladon, Laladon, Kecamatan
+                         Ciomas , Jawa Barat,
+                         16610.</p>
+                     <p class="mt-1">{{ $data->waktu_masuk }}</p>
+                     <h5 style="margin-top: -6px;">KODE PARKIR : </h5>
+                     <p style="margin-top: -9px;font-size:30px;">
+                         {{ $data->kode_parkir }}</p>
+                     <p class="mt-2" style="font-size:10px;">1.
+                         KERUSAKAN & KEHILANGAN BARANG DALAM KENDARAAN
+                         JADI TANGGUNG JAWAB PEMILIK (TIDAK ADA
+                         PENGGANTIAN) <br>
+                         2. BERLAKU 1X (SATU KALI) PARKIR</p>
                  </div>
-                 <ul class="list-group list-group-flush">
-                     <li class="list-group-item"></li>
-                     <li class="list-group-item">Nomor Polisi : <b>{{ $data->vehicle->no_kendaraan }}</b></li>
-                     <li class="list-group-item">Merk : <b>{{ $data->vehicle->merk }}</b></li>
-                     <li class="list-group-item">Tipe : <b>{{ $data->vehicle->tipe }}</b></li>
-                     <li class="list-group-item">Waktu Masuk : <b>{{ $jam_masuk }}</b></li>
-                     <li class="list-group-item">Tarif/jam : <b>Rp. {{ number_format($data->tarif) }}-</b></li>
-                 </ul>
-                 <p class="card-text mt-2"><small class="text-muted">Jangan tutup halaman ini.</small></p>
+
+
                  <a href="{{ route('user.keluar', $data->kode_parkir) }}" class="btn btn-primary btn-sm btn-block">Exit
                      Parkir</a>
-                 <div class="card-footer text-muted">
+                 <div class="card-footer text-muted text-center">
                      {{ $tanggal_masuk }}
                  </div>
-             </div>
+             </section>
          </div>
+     </div>
      </div>
  </x-app-login>

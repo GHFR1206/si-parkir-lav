@@ -5,7 +5,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        @include('layouts._card-navbar')
+                        @include('includes._card-navbar')
                     </div>
 
                     <div class="card-body">
@@ -23,7 +23,7 @@
                                                         <div class="col mx-auto">
                                                             <form action="{{ route('parkir.store') }}" method="POST">
                                                                 @csrf
-                                                                @include('layouts._form')
+                                                                @include('includes._form')
                                                             </form>
                                                         </div>
                                                     </div>

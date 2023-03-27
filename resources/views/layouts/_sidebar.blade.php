@@ -34,18 +34,9 @@
                     <li class="nav-item">
                         <a href="{{ route('parkir.index') }}"
                             class="nav-link {{ request()->routeIs('parkir.index') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-solid fa-car"></i>
+                            <i class="nav-icon fas fa-parking    "></i>
                             <p>
-                                Data Kendaraan Aktif
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('parkir.data.selesai') }}"
-                            class="nav-link {{ request()->routeIs('parkir.data.selesai') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-solid fa-check"></i>
-                            <p>
-                                Data Kendaraan Selesai
+                                Data Kendaraan
                             </p>
                         </a>
                     </li>
@@ -54,7 +45,7 @@
                             class="nav-link {{ request()->routeIs('parkir.create') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-solid fa-plus"></i>
                             <p>
-                                Tambah Data Parkir
+                                Masuk / Keluar
                             </p>
                         </a>
                     </li>

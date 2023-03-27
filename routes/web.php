@@ -26,10 +26,11 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 // Admin
 Route::controller(ParkingController::class)->middleware('auth')->group(function () {
     Route::resource('parkir', ParkingController::class);
-    Route::post('/parkir/create', 'store')->name('parkir.store');
-    Route::get('/parkir/selesai', 'data_selesai')->name('parkir.data.selesai');
-    Route::get('/parkir/keluar', 'showParkirKeluar')->name('parkir.keluar');
-    Route::put('/parkir/{parkir}/keluar', 'parkirKeluar')->name('parkir.update.keluar');
+    Route::post('/masuk/parkir', 'store')->name('parkir.store');
+    Route::get('/masuk/parkir', 'create')->name('parkir.create');
+    Route::get('/keluar/parkir', 'parkirKeluar')->name('parkir.getKeluar');
+    Route::post('/keluar/parkir', 'parkirKeluar')->name('parkir.postKeluar');
+    Route::put('/parkir/{parkir}/keluar', 'keluar')->name('parkir.update.keluar');
 });
 
 // User

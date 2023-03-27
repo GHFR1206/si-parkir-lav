@@ -11,7 +11,6 @@
                      </h4>
                  </div>
                  <ul class="list-group list-group-flush">
-                     <li class="list-group-item">Merk : <b>{{ $data->vehicle->merk }}</b></li>
                      <li class="list-group-item">Tipe : <b>{{ $data->vehicle->tipe }}</b></li>
                      <li class="list-group-item">Waktu Masuk : <b>{{ $jam_masuk }}</b></li>
                      <li class="list-group-item">Waktu Keluar : <b>{{ $jam_keluar }}</b></li>

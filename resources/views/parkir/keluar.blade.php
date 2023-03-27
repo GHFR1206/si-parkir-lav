@@ -5,7 +5,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        @include('layouts._card-navbar')
+                        @include('includes._card-navbar')
                     </div>
 
                     <div class="card-body">
@@ -21,24 +21,40 @@
                                                 <div class="container h-100">
                                                     <div class="row align-items-center h-100">
                                                         <div class="col mx-auto">
-                                                            <form action="{{ route('parkir.update.keluar') }}"
-                                                                method="POST">
+                                                            <form action="{{ route('parkir.postKeluar') }}"
+                                                                method="post" enctype="multipart/form-data">
                                                                 @csrf
-                                                                @method('PUT')
-                                                                <div class="input-group mb-3">
-                                                                    <input type="text"
-                                                                        class="form-control @error('kode_parkir') is-invalid @enderror"
-                                                                        name="kode_parkir" id="kode_parkir"
-                                                                        placeholder="Masukkan Kode Parkir Untuk Keluar"
-                                                                        autocomplete="off">
-                                                                    <div class="input-group-append">
-                                                                        <div class="input-group-text">
-                                                                        </div>
+                                                                <div class="form-group row">
+                                                                    <label for="tanggal"
+                                                                        class="col-sm-4 col-form-label"
+                                                                        style="font-size:13px;">Tanggal / Waktu</label>
+                                                                    <div class="col-sm-8">
+                                                                        <p class="text-muted"><span
+                                                                                id="tanggal"></span> ; <span
+                                                                                id="watch"></span></p>
                                                                     </div>
-                                                                    @error('kode_parkir')
-                                                                        <span
-                                                                            class="invalid-feedback">{{ $message }}</span>
-                                                                    @enderror
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="nomor"
+                                                                        class="col-sm-4 col-form-label"
+                                                                        style="font-size:13px;">Kode Parkir</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text"
+                                                                            class="form-control @error('kode_parkir') is-invalid @enderror"
+                                                                            id="kode_parkir" name="kode_parkir">
+                                                                        @error('kode_parkir')
+                                                                            <div class="mt-1">
+                                                                                <small class="ml-1"
+                                                                                    style="color: red;">{{ $message }}</small>
+                                                                            </div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row text-right">
+                                                                    <div class="col-sm">
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary">Submit</button>
+                                                                    </div>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -56,35 +72,66 @@
                                                 <div class="container h-100">
                                                     <div class="row align-items-center h-100">
                                                         <div class="col mx-auto">
-                                                            @if ($parkir == 'belumKeluar')
+                                                            @if (!$getParkir && !$parkir)
                                                                 <div class="col-lg text-center">
-                                                                    <h3>NOMOR POLISI KENDARAAN SUDAH MASUK TEMPAT PARKIR
-                                                                        DAN BELUM KELUAR</h3>
+                                                                    <h4>SILAHKAN SUBMIT KODE PARKIR TERLEBIH DAHULU</h4>
                                                                 </div>
-                                                            @elseif($parkir)
-                                                                <div class=" container text-center p-0">
-                                                                    <h5>Tiket Parkir</h5>
-                                                                    <br>
-                                                                    <p class="p-0"
-                                                                        style="margin-top: -12px !important; font-size:10px">
-                                                                        Thamrin Office Park AA03 Jl. Boulevard, Jl.
-                                                                        Teluk Betung, RT.11/RW.9, Kb. Melati, Kecamatan
-                                                                        Tanah Abang , Daerah Khusus Ibukota Jakarta,
-                                                                        10240.</p>
-                                                                    <p class="mt-1">{{ $waktu_masuk }}</p>
-                                                                    <h5 style="margin-top: -6px;">KODE PARKIR : </h5>
-                                                                    <p style="margin-top: -9px;font-size:30px;">
-                                                                        {{ $kode_unik }}</p>
-                                                                    <p class="mt-2" style="font-size:10px;">1.
-                                                                        KERUSAKAN & KEHILANGAN BARANG DALAM KENDARAAN
-                                                                        JADI TANGGUNG JAWAB PEMILIK (TIDAK ADA
-                                                                        PENGGANTIAN) <br>
-                                                                        2. BERLAKU 1X (SATU KALI) PARKIR</p>
-                                                                </div>
-                                                            @else
+                                                            @elseif ($parkir == 'keluar')
                                                                 <div class="col-lg text-center">
-                                                                    <h3>SILAHKAN INPUT KENDARAAN MASUK UNTUK MENDAPATKAN
-                                                                        TIKET PARKIR</h3>
+                                                                    <h3>KODE PARKIR SUDAH EXPIRED (KENDARAAN SUDAH
+                                                                        KELUAR PARKIR)</h3>
+                                                                </div>
+                                                            @elseif ($parkir == 'notCode')
+                                                                <div class="col-lg text-center">
+                                                                    <h4>KODE TIDAK DITEMUKAN</h4>
+                                                                </div>
+                                                            @elseif ($getParkir)
+                                                                <div class="col-lg text-center">
+                                                                    <h3>KODE PARKIR : {{ $getParkir->kode_parkir }}</h3>
+                                                                </div>
+                                                                <div class="row mt-4">
+                                                                    <div class="col-lg-5">
+                                                                        <p>Total Bayar</p>
+                                                                    </div>
+                                                                    <div class=" col-lg-7">
+                                                                        <h2 class="text-danger">{{ $hasil_rupiah }}</h2>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-5"
+                                                                        style="margin-top: -10px !important;">
+                                                                        <p class="mt-4">Nomor Polisi</p>
+                                                                    </div>
+                                                                    <div class="col-lg-7"
+                                                                        style="margin-top: -10px !important;">
+                                                                        <p class="mt-4">:
+                                                                            {{ $getParkir->vehicle->no_kendaraan }}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row" style="margin-top: -10px;">
+                                                                    <div class="col-lg-5">
+                                                                        <p sty>Jenis Kendaraan</p>
+                                                                    </div>
+                                                                    <div class="col-lg-7">
+                                                                        <p>: {{ $getParkir->vehicle->tipe }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row" style="margin-top: -10px;">
+                                                                    <div class="col-lg-5">
+                                                                        <p sty>Waktu Masuk</p>
+                                                                    </div>
+                                                                    <div class=" col-lg-7">
+                                                                        <p>: {{ $getParkir->waktu_masuk }}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row" style="margin-top: -10px;">
+                                                                    <div class="col-lg-5">
+                                                                        <p sty>Waktu Keluar</p>
+                                                                    </div>
+                                                                    <div class=" col-lg-7">
+                                                                        <p>: {{ $getParkir->waktu_keluar }}</p>
+                                                                    </div>
                                                                 </div>
                                                             @endif
                                                         </div>
@@ -92,6 +139,13 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @if ($export)
+                                            <a class="btn btn-primary"
+                                                href="{{ route('exportPDF', $getParkir->kode_parkir) }}"><i
+                                                    class="fas fa-file-pdf"></i></a>
+                                            <a href="#" rel="noopener" target="_blank" onclick="window.print();"
+                                                class="btn btn-primary"><i class="fas fa-print"></i></a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -102,39 +156,3 @@
         </div>
     </div>
 </x-app-layout>
-
-{{-- 
-  <div class="container mt-5">
-      <div class="row justify-content-center mt-5">
-        <div class="register-box">
-          <div class="register-logo">
-            <a href="#"><b>GHFR</b>ParkNet.Id</a>
-          </div>
-    
-          <div class="card">
-            <div class="card-body register-card-body">
-              <div class="row">
-                <div class="col-lg">
-                  <div class="card-group">
-                    <div class="col-lg-6">
-                      <div class="card">
-                        <div class="card-body">
-                          <p class="login-box-msg">Daftarkan kendaraan user disini</p>
-                            <form action="{{ route('parkir.store') }}" method="POST">
-                              @csrf
-                              @include('layouts._form')
-                            </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- /.form-box -->
-          </div>
-          <!-- /.card -->
-    </div>
-    <!-- /.register-box -->
-      </div>
-  </div> --}}
