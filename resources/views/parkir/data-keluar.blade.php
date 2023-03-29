@@ -1,4 +1,4 @@
-<x-app-layout title="Data Aktif" aktif="active" header="Data Parkir Masuk">
+<x-app-layout title="Data Selesai" header="Data Parkir Keluar">
     <!-- Small boxes (Stat box) -->
     <div class="row d-flex justify-content-center">
         <div class="col-lg-3 col-6">
@@ -77,7 +77,7 @@
                                 Keluar</a>
                         </li>
                         <li class="nav-item">
-                            <p class="nav-link">Aktif : {{ $aktif }}</p>
+                            <p class="nav-link">Selesai : {{ $keluar }}</p>
                         </li>
                     </ul>
                 </div>
@@ -90,6 +90,7 @@
                                 <th>Nomor Kendaraan</th>
                                 <th>Tipe</th>
                                 <th>Waktu Masuk</th>
+                                <th>Waktu Keluar</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -100,6 +101,7 @@
                                     <td>{{ $data->vehicle->no_kendaraan }}</td>
                                     <td>{{ $data->vehicle->tipe }}</td>
                                     <td>{{ $data->waktu_masuk }}</td>
+                                    <td>{{ $data->waktu_keluar }}</td>
                                     <td>
                                         @if (Auth::user()->role == 0)
                                             <a href="#" class="btn btn-warning"><i

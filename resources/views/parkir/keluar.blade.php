@@ -43,10 +43,8 @@
                                                                             class="form-control @error('kode_parkir') is-invalid @enderror"
                                                                             id="kode_parkir" name="kode_parkir">
                                                                         @error('kode_parkir')
-                                                                            <div class="mt-1">
-                                                                                <small class="ml-1"
-                                                                                    style="color: red;">{{ $message }}</small>
-                                                                            </div>
+                                                                            <span
+                                                                                class="invalid-feedback">{{ $message }}</span>
                                                                         @enderror
                                                                     </div>
                                                                 </div>
@@ -141,7 +139,7 @@
                                         </div>
                                         @if ($export)
                                             <a class="btn btn-primary"
-                                                href="{{ route('exportPDF', $getParkir->kode_parkir) }}"><i
+                                                href="{{ route('report.exportKeluar', $getParkir->kode_parkir) }}"><i
                                                     class="fas fa-file-pdf"></i></a>
                                             <a href="#" rel="noopener" target="_blank" onclick="window.print();"
                                                 class="btn btn-primary"><i class="fas fa-print"></i></a>

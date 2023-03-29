@@ -1,6 +1,18 @@
 <x-app-layout title="Register Kendaraan" tambah="active">
 
-    <div class="container-fluid mt-n4">
+    <div class="header">
+        <div class="container-fluid">
+            <div class="header-body">
+                <div class="row align-items-center text-right py-2">
+                    <div class="col-lg-12 col-5">
+                        <strong><span id="tanggal2"></span></strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col">
                 <div class="card">
@@ -78,7 +90,7 @@
                                         </div>
                                         @if ($export)
                                             <a class="btn btn-primary"
-                                                href="{{ route('exportPDF', $parkir->kode_parkir) }}"><i
+                                                href="{{ route('report.exportInvoice', $parkir->kode_parkir) }}"><i
                                                     class="fas fa-file-pdf"></i></a>
                                             <a href="#" rel="noopener" target="_blank" onclick="window.print();"
                                                 class="btn btn-primary"><i class="fas fa-print"></i></a>

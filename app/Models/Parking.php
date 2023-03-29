@@ -27,4 +27,9 @@ class Parking extends Model
     {
         return $this->belongsTo(Vehicle::class, 'vehicle_id');
     }
+
+    public function vehicleSearch($search)
+    {
+        return $this->vehicle()->where('no_kendaraan', 'LIKE', '%' . $search . '%');
+    }
 }

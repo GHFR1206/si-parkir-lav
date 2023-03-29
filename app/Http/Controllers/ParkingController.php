@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Parking;
 use App\Models\Vehicle;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UserExitRequest;
 
 class ParkingController extends Controller
 {
@@ -25,7 +26,7 @@ class ParkingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $aktif = Parking::with('vehicle')->where('status', 'aktif')->get()->count();
         $motor = Parking::whereHas('vehicle', function ($query) {
@@ -40,9 +41,47 @@ class ParkingController extends Controller
             $query->where('tipe', 'Truk/Lainnya');
         })->where('status', 'Aktif')->count();
 
-        $dataaktifs = Parking::with('vehicle')->where('status', 'aktif')->paginate('7');
+
+        if ($request->has('search')) {
+            $getParkir = Parking::with('vehicle')->whereHas('vehicle', function ($query) {
+                $search = request('search');
+                $query->where('no_kendaraan', 'LIKE', '%' . $search . '%');
+            })->where('status', 'Aktif')->paginate('7');
+        } else {
+            $getParkir = Parking::with('vehicle')->where('status', 'aktif')->paginate('7');
+        }
+
         $pendapatan = Parking::sum('tarif');
-        return view('parkir.index', compact('aktif', 'dataaktifs', 'pendapatan', 'motor', 'mobil', 'truk'));
+        return view('parkir.index', compact('aktif', 'getParkir', 'pendapatan', 'motor', 'mobil', 'truk'));
+    }
+
+    public function data_keluar(Request $request)
+    {
+        $keluar = Parking::with('vehicle')->where('status', 'keluar')->get()->count();
+        $motor = Parking::whereHas('vehicle', function ($query) {
+            $query->where('tipe', 'Motor');
+        })->where('status', 'keluar')->count();
+
+        $mobil = Parking::whereHas('vehicle', function ($query) {
+            $query->where('tipe', 'Mobil');
+        })->where('status', 'keluar')->count();
+
+        $truk = Parking::whereHas('vehicle', function ($query) {
+            $query->where('tipe', 'Truk/Lainnya');
+        })->where('status', 'keluar')->count();
+
+
+        if ($request->has('search')) {
+            $getParkir = Parking::with('vehicle')->whereHas('vehicle', function ($query) {
+                $search = request('search');
+                $query->where('no_kendaraan', 'LIKE', '%' . $search . '%');
+            })->where('status', 'keluar')->paginate('7');
+        } else {
+            $getParkir = Parking::with('vehicle')->where('status', 'keluar')->paginate('7');
+        }
+
+        $pendapatan = Parking::sum('tarif');
+        return view('parkir.data-keluar', compact('keluar', 'getParkir', 'pendapatan', 'motor', 'mobil', 'truk'));
     }
 
     /**

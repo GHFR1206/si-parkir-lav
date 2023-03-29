@@ -9,6 +9,32 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
 
+        @if (request()->routeIs('parkir.index', 'parkir.data-keluar'))
+            <!-- Navbar Search -->
+            <li class="nav-item">
+                <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                    <i class="fas fa-search"></i>
+                </a>
+                <div class="navbar-search-block">
+                    <form class="form-inline" method="get"
+                        action="@if (request()->routeIs('parkir.index')) {{ route('parkir.index') }} @else {{ route('parkir.data-keluar') }} @endif">
+                        <div class="input-group input-group-sm">
+                            <input class="form-control form-control-navbar" type="search" name="search"
+                                placeholder="Search" aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-navbar" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </li>
+        @endif
+
         @if (Auth::user()->role == 0)
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="{{ route('register') }}" class="nav-link"><i class="nav-icon fas fa-user-plus"></i></a>

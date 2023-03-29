@@ -8,6 +8,7 @@ use App\Http\Controllers\ParkingController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ParkingUserController;
 use App\Http\Controllers\Auth\RegisterController;
+use Illuminate\Routing\RouteGroup;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,8 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 // Admin
 Route::controller(ParkingController::class)->middleware('auth')->group(function () {
     Route::resource('parkir', ParkingController::class);
+    Route::get('/parkir/data/masuk', 'index')->name('parkir.index');
+    Route::get('/parkir/data/keluar', 'data_keluar')->name('parkir.data-keluar');
     Route::post('/masuk/parkir', 'store')->name('parkir.store');
     Route::get('/masuk/parkir', 'create')->name('parkir.create');
     Route::get('/keluar/parkir', 'parkirKeluar')->name('parkir.getKeluar');
@@ -39,5 +42,11 @@ Route::get('/', [ParkingUserController::class, 'index'])->name('home');
 Route::get('/user/{user}/keluar', [ParkingUserController::class, 'edit'])->name('user.keluar');
 
 // Report Controlller
-Route::get('/parkir/{parkir}/export', [ReportController::class, 'exportPDF'])->name('exportPDF');
-Route::get('/parkir/{parkir}/print', [ReportController::class, 'print'])->name('print');
+Route::controller(ReportController::class)->middleware('auth')->group(function () {
+    Route::get('/laporan', 'report')->name('report.getLaporan');
+    Route::post('/laporan/postLaporan', 'postReport')->name('report.postLaporan');
+    Route::get('/laporan/export', 'exportReport')->name('report.exportLaporan');
+    Route::get('/{parkir}/export/invoice', 'exportInvoice')->name('report.exportInvoice');
+    Route::get('/{parkir}/export/keluar', 'exportKeluar')->name('report.exportKeluar');
+    Route::get('/{parkir}/print', 'print')->name('report.print');
+});
