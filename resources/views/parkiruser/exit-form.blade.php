@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="register-box">
                 <div class="register-logo">
-                    <a href="#"><b>GHFR</b>ParkNet.Id</a>
+                    <a class="text-white"><b>GHFR</b>ParkNet.Id</a>
                 </div>
 
                 @if ($parkir == 'keluar')

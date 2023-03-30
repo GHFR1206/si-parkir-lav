@@ -11,15 +11,10 @@ use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UserExitRequest;
+use App\Http\Requests\TambahKendaraanRequest;
 
 class ParkingController extends Controller
 {
-
-    public $parkir;
-    public function __construct($parkir = null)
-    {
-        $this->parkir = $parkir;
-    }
 
     /**
      * Display a listing of the resource.
@@ -46,9 +41,9 @@ class ParkingController extends Controller
             $getParkir = Parking::with('vehicle')->whereHas('vehicle', function ($query) {
                 $search = request('search');
                 $query->where('no_kendaraan', 'LIKE', '%' . $search . '%');
-            })->where('status', 'Aktif')->paginate('7');
+            })->where('status', 'Aktif')->latest()->paginate('7');
         } else {
-            $getParkir = Parking::with('vehicle')->where('status', 'aktif')->paginate('7');
+            $getParkir = Parking::with('vehicle')->where('status', 'aktif')->latest()->paginate('7');
         }
 
         $pendapatan = Parking::sum('tarif');
@@ -75,9 +70,9 @@ class ParkingController extends Controller
             $getParkir = Parking::with('vehicle')->whereHas('vehicle', function ($query) {
                 $search = request('search');
                 $query->where('no_kendaraan', 'LIKE', '%' . $search . '%');
-            })->where('status', 'keluar')->paginate('7');
+            })->where('status', 'keluar')->latest()->paginate('7');
         } else {
-            $getParkir = Parking::with('vehicle')->where('status', 'keluar')->paginate('7');
+            $getParkir = Parking::with('vehicle')->where('status', 'keluar')->latest()->paginate('7');
         }
 
         $pendapatan = Parking::sum('tarif');
@@ -103,7 +98,7 @@ class ParkingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Parking $parking)
+    public function store(TambahKendaraanRequest $request, Parking $parking)
     {
         $waktu_masuk = Carbon::now()->toDateTimeString();
         $merk = $request->merk;
@@ -247,7 +242,7 @@ class ParkingController extends Controller
             'status' => 'Keluar'
         ]);
 
-        session()->flash('success');
+        session()->flash('suksesKeluarParking');
         return redirect()->route('parkir.index')->with([
             'getParkir' => $getParkir,
             'hasil_rupiah' => $hasil_rupiah,

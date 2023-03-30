@@ -126,8 +126,20 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
-    @if (Session::has('success'))
+    @if (Session::has('suksesKeluarParking'))
         toastr.success('Kendaraan berhasil keluar!', 'Berhasil Keluar')
+    @endif
+</script>
+
+<script>
+    @if (Session::has('suksesHapusAkun'))
+        toastr.success('Akun berhasil dihapus!', 'Berhasil Dihapus')
+    @endif
+</script>
+
+<script>
+    @if (Session::has('suksesUpdateAkun'))
+        toastr.success('Akun berhasil diubah!', 'Berhasil Diubah')
     @endif
 </script>
 

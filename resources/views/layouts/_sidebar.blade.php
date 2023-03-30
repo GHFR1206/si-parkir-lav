@@ -15,7 +15,7 @@
                     <img src="{{ asset('img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">{{ Auth::user()->username }}
+                    <a href="{{ route('profile') }}" class="d-block">{{ Auth::user()->username }}
                         @if (Auth::user()->role == '0')
                             <small class="text-muted">(admin)</small>
                         @endif
@@ -33,7 +33,7 @@
                    with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <a href="{{ route('parkir.index') }}"
-                            class="nav-link {{ request()->routeIs('parkir.index') ? 'active' : '' }}">
+                            class="nav-link {{ request()->routeIs('parkir.index', 'parkir.data-keluar') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-parking    "></i>
                             <p>
                                 Data Kendaraan
@@ -49,6 +49,17 @@
                             </p>
                         </a>
                     </li>
+                    @if (Auth::user()->role == 0)
+                        <li class="nav-item">
+                            <a href="{{ route('akun.index') }}"
+                                class="nav-link {{ request()->routeIs('akun.index') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-user" aria-hidden="true"></i>
+                                <p>
+                                    Akun
+                                </p>
+                            </a>
+                        </li>
+                    @endif
                     <li class="nav-item">
                         <a href="{{ route('report.getLaporan') }}"
                             class="nav-link {{ request()->routeIs('report.getLaporan') ? 'active' : '' }}">

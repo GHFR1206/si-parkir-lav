@@ -1,7 +1,7 @@
 <x-app-login title="Masuk Parkir">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ route('home') }}"><b>GHFR</b>ParkNet.Id</a>
+            <a class="text-white" href="{{ route('home') }}"><b>GHFR</b>ParkNet.Id</a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
@@ -23,7 +23,7 @@
             </div>
             <!-- /.login-card-body -->
         </div>
-        <a href="{{ route('login') }}"><small class="text-muted">Khusus admin atau petugas</small></a>
+        <a href="{{ route('login') }}"><small class="text-white">Khusus admin atau petugas</small></a>
     </div>
     <!-- /.login-box -->
 </x-app-login>

@@ -1,16 +1,4 @@
-<x-app-layout title="Register Kendaraan" tambah="active">
-
-    <div class="header">
-        <div class="container-fluid">
-            <div class="header-body">
-                <div class="row align-items-center text-right py-2">
-                    <div class="col-lg-12 col-5">
-                        <strong><span id="tanggal2"></span></strong>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<x-app-layout title="Register Kendaraan" header="Kendaraan Masuk">
 
     <div class="container-fluid">
         <div class="row justify-content-center">

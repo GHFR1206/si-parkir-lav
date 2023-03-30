@@ -9,8 +9,7 @@
     @include('includes._styles')
 </head>
 
-<body class="hold-transition login-page">
-
+<body class="hold-transition login-page bg-image">
     {{ $slot }}
     @include('includes._scripts')
 

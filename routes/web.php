@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AkunController;
+use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -8,7 +10,6 @@ use App\Http\Controllers\ParkingController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ParkingUserController;
 use App\Http\Controllers\Auth\RegisterController;
-use Illuminate\Routing\RouteGroup;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +51,13 @@ Route::controller(ReportController::class)->middleware('auth')->group(function (
     Route::get('/{parkir}/export/keluar', 'exportKeluar')->name('report.exportKeluar');
     Route::get('/{parkir}/print', 'print')->name('report.print');
 });
+
+// Akun
+Route::controller(AkunController::class)->middleware('auth')->group(function () {
+    Route::resource('akun', AkunController::class);
+    Route::get('/profile', 'profile')->name('profile');
+});
+
+// Route::get('/forgot/password', [AkunController::class, 'forgotPassword'])->name('forgot-password');
+// Route::post('/reset/password', [AkunController::class, 'resetPassword'])->name('reset-password');
+// Route::post('/update/{akun}/password', [AkunController::class, 'updatePassword'])->name('update-password');

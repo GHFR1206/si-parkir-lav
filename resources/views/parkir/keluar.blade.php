@@ -1,6 +1,6 @@
-<x-app-layout title="Keluar Parkir">
+<x-app-layout title="Keluar Parkir" header="Kendaraan Keluar">
 
-    <div class="container-fluid mt-n4">
+    <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col">
                 <div class="card">

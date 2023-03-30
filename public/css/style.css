@@ -1,6 +1,15 @@
+.bg-image {
+    background-image: url('https://images.unsplash.com/photo-1495435229349-e86db7bfa013?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1077&q=80');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
 @media print{
     body * {
         visibility: hidden;
+        margin: 0;
+        padding: 0;
     }
 
     .print-container, .print-container *{

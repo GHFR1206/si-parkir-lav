@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="login-box">
                 <div class="login-logo">
-                    <a href="{{ route('home') }}"><b>GHFR</b>ParkNet.Id</a>
+                    <a class="text-white" href="{{ route('home') }}"><b>GHFR</b>ParkNet.Id</a>
                 </div>
                 <!-- /.login-logo -->
                 <div class="card">
@@ -48,9 +48,10 @@
                                     </span>
                                 @enderror
                             </div>
+                            <a href="{{ route('password.request') }}">Lupa password?</a>
                             <div class="row">
                                 <!-- /.col -->
-                                <div class="col-12">
+                                <div class="col-12 mt-2">
                                     <button type="submit" class="btn btn-primary btn-block">Sign In</button>
                                 </div>
                                 <!-- /.col -->

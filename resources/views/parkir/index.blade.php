@@ -101,11 +101,6 @@
                                     <td>{{ $data->vehicle->tipe }}</td>
                                     <td>{{ $data->waktu_masuk }}</td>
                                     <td>
-                                        @if (Auth::user()->role == 0)
-                                            <a href="#" class="btn btn-warning"><i
-                                                    class="fa-solid fa-pen-to-square"></i></a>
-                                        @endif
-
                                         <a href="#"
                                             onclick="event.preventDefault(); document.getElementById('parkir.update.keluar').submit();"
                                             class="btn btn-danger"><i class="fa-solid fa-right-from-bracket"></i></a>
@@ -126,6 +121,7 @@
                             @endforelse
                         </tbody>
                     </table>
+                    {{ $getParkir->links() }}
                 </div>
                 <!-- /.card-body -->
             </div>
