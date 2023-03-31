@@ -1,4 +1,4 @@
-<x-app-layout title="My Profile | GHFRParkNet.ID" header="My Profile">
+<x-app-layout title="My Profile" header="My Profile">
     <div class="header">
         <div class="container-fluid">
             <div class="header-body">

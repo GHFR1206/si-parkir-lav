@@ -1,4 +1,4 @@
-<x-app-layout title="{{ $getAkun->username }} Profile | GHFRParkNet.ID" header="{{ $getAkun->name }}">
+<x-app-layout title="{{ $getAkun->username }} Profile" header="{{ $getAkun->name }}">
     <div class="header">
         <div class="container-fluid">
             <div class="header-body">

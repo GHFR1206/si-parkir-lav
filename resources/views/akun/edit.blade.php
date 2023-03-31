@@ -1,4 +1,4 @@
-<x-app-layout title="Edit | GHFRParkNet.Id">
+<x-app-layout title="Edit">
     <div class="container">
         <div class="row justify-content-center">
             <div class="login-box">
