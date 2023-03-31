@@ -91,7 +91,6 @@
                                 <th>Tipe</th>
                                 <th>Waktu Masuk</th>
                                 <th>Waktu Keluar</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -102,17 +101,6 @@
                                     <td>{{ $data->vehicle->tipe }}</td>
                                     <td>{{ $data->waktu_masuk }}</td>
                                     <td>{{ $data->waktu_keluar }}</td>
-                                    <td>
-                                        <a href="#"
-                                            onclick="event.preventDefault(); document.getElementById('parkir.update.keluar').submit();"
-                                            class="btn btn-danger"><i class="fa-solid fa-right-from-bracket"></i></a>
-
-                                        <form action="{{ route('parkir.update.keluar', $data->kode_parkir) }}"
-                                            method="POST" id="parkir.update.keluar">
-                                            @csrf
-                                            @method('put')
-                                        </form>
-                                    </td>
                                 </tr>
                             @empty
                                 <tr>

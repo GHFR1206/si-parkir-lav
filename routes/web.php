@@ -23,7 +23,7 @@ use App\Http\Controllers\Auth\RegisterController;
 */
 
 Auth::routes();
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register')->middleware(['auth', 'admin']);
 
 // Admin
 Route::controller(ParkingController::class)->middleware('auth')->group(function () {
@@ -53,9 +53,9 @@ Route::controller(ReportController::class)->middleware('auth')->group(function (
 });
 
 // Akun
-Route::controller(AkunController::class)->middleware('auth')->group(function () {
+Route::get('/profile', [AkunController::class, 'profile'])->name('profile');
+Route::controller(AkunController::class)->middleware('auth', 'admin')->group(function () {
     Route::resource('akun', AkunController::class);
-    Route::get('/profile', 'profile')->name('profile');
 });
 
 // Route::get('/forgot/password', [AkunController::class, 'forgotPassword'])->name('forgot-password');
