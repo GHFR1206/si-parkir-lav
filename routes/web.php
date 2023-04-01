@@ -55,7 +55,7 @@ Route::controller(ReportController::class)->middleware('auth')->group(function (
 
 // Akun
 Route::get('/profile', [AkunController::class, 'profile'])->name('profile')->middleware('auth');
-Route::controller(AkunController::class)->middleware('auth', 'admin')->group(function () {
+Route::controller(AkunController::class)->middleware(['auth', 'admin'])->group(function () {
     Route::resource('akun', AkunController::class);
 });
 
