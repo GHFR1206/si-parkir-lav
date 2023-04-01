@@ -79,6 +79,12 @@ class ParkingController extends Controller
         return view('parkir.data-keluar', compact('keluar', 'getParkir', 'pendapatan', 'motor', 'mobil', 'truk'));
     }
 
+    public function detail($parkir)
+    {
+        $getParkir = Parking::with('vehicle')->find($parkir);
+        return view('parkir.detail', compact('getParkir'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

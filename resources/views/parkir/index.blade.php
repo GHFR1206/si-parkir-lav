@@ -90,9 +90,7 @@
                                 <th>Nomor Kendaraan</th>
                                 <th>Tipe</th>
                                 <th>Waktu Masuk</th>
-                                @if(Auth::user()->role == 0)
-                                    <th>Aksi</th>
-                                @endif
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -102,19 +100,23 @@
                                     <td>{{ $data->vehicle->no_kendaraan }}</td>
                                     <td>{{ $data->vehicle->tipe }}</td>
                                     <td>{{ $data->waktu_masuk }}</td>
-                                    @if(Auth::user()->role == 0)
-                                        <td>
+                                    <td>
+                                        <a href="{{ route('parkir.detail', $data->id) }}" class="btn btn-primary"><i
+                                                class="fa fa-eye" aria-hidden="true"></i></a>
+
+                                        @if (Auth::user()->role == 0)
                                             <a href="#"
                                                 onclick="event.preventDefault(); document.getElementById('parkir.update.keluar').submit();"
-                                                class="btn btn-danger"><i class="fa-solid fa-right-from-bracket"></i></a>
+                                                class="btn btn-danger"><i
+                                                    class="fa-solid fa-right-from-bracket"></i></a>
 
                                             <form action="{{ route('parkir.update.keluar', $data->kode_parkir) }}"
                                                 method="POST" id="parkir.update.keluar">
                                                 @csrf
                                                 @method('put')
                                             </form>
-                                        </td>
-                                    @endif
+                                        @endif
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>

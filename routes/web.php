@@ -23,13 +23,14 @@ use App\Http\Controllers\Auth\RegisterController;
 */
 
 Auth::routes();
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register')->middleware(['auth', 'admin']);
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register')->middleware(['admin', 'auth']);
 
 // Admin
 Route::controller(ParkingController::class)->middleware('auth')->group(function () {
     Route::resource('parkir', ParkingController::class);
     Route::get('/parkir/data/masuk', 'index')->name('parkir.index');
     Route::get('/parkir/data/keluar', 'data_keluar')->name('parkir.data-keluar');
+    Route::get('/parkir/{parkir}/detail', 'detail')->name('parkir.detail');
     Route::post('/masuk/parkir', 'store')->name('parkir.store');
     Route::get('/masuk/parkir', 'create')->name('parkir.create');
     Route::get('/keluar/parkir', 'parkirKeluar')->name('parkir.getKeluar');

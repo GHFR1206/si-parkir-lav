@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Parking;
+use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
 use App\Http\Controllers\Controller;
 
 class ReportController extends Controller
@@ -108,7 +108,7 @@ class ReportController extends Controller
         $tanggal_masuk = Carbon::parse($getParkir->waktu_masuk)->format('d/m/y');
 
         view()->share('getParkir', $getParkir);
-        $pdf = PDF::loadView('export.invoice', compact('getParkir', 'tanggal_masuk'))->setPaper('B6');
+        $pdf = PDF::loadView('report.invoice', compact('getParkir', 'tanggal_masuk'))->setPaper('B6');
         return $pdf->download("invoice-$getParkir->kode_parkir" . '.pdf');
     }
 

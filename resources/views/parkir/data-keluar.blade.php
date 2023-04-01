@@ -91,6 +91,7 @@
                                 <th>Tipe</th>
                                 <th>Waktu Masuk</th>
                                 <th>Waktu Keluar</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -101,6 +102,9 @@
                                     <td>{{ $data->vehicle->tipe }}</td>
                                     <td>{{ $data->waktu_masuk }}</td>
                                     <td>{{ $data->waktu_keluar }}</td>
+                                    <td>
+                                        <a href="{{route('parkir.detail', $data->id)}}" class="btn btn-primary" ><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>
