@@ -16,7 +16,7 @@
                      <li class="list-group-item">Waktu Keluar : <b>{{ $jam_keluar }}</b></li>
                      <li class="list-group-item">Tarif : <b>Rp. {{ number_format($data->tarif) }}-</b></li>
                  </ul>
-                 <a href="{{ route('user.index') }}" class="btn btn-primary btn-sm btn-block">Parkir lagi..</a>
+                 <a href="{{ route('user.index') }}" class="btn btn-primary btn-sm btn-block">Terimakasih!</a>
                  <div class="card-footer text-muted">
                      {{ $tanggal_keluar }}
                  </div>
