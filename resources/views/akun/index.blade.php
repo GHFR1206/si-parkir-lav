@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout title="Akun" header="Akun">
     <!-- Main row -->
     <div class="row">
         <!-- Tabel Kendaraan Aktif -->
