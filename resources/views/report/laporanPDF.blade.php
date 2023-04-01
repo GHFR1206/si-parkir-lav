@@ -44,6 +44,7 @@
             <th scope="col" class="sort" data-sort="budget" style="font-size:15px">Kendaraan</th>
             <th scope="col" class="sort" data-sort="status" style="font-size:15px">Waktu Masuk</th>
             <th scope="col" class="sort" data-sort="status" style="font-size:15px">Waktu Keluar</th>
+            <th scope="col" class="sort" data-sort="status" style="font-size:15px">Petugas</th>
             <th scope="col" class="sort" data-sort="status" style="font-size:15px">Tarif</th>
         </tr>
         @forelse($kendaraan as $k)
@@ -74,6 +75,12 @@
                         </span>
                     </td>
                 @endif
+                <td>
+                    <span class="name mb-0 text-sm">
+                        <span class="status">{{ $k->user->name }}</span>
+                    </span>
+                </td>
+
                 <td>
                     <span class="name mb-0 text-sm">
                         <span class="status">{{ $k->tarif }}</span>

@@ -45,6 +45,7 @@
                     JADI TANGGUNG JAWAB PEMILIK (TIDAK ADA
                     PENGGANTIAN) <br>
                     2. BERLAKU 1X (SATU KALI) PARKIR</p>
+                <small>Petugas : {{ $getParkir->user->name }}</small>
             </div>
         </section>
         <!-- /.content -->

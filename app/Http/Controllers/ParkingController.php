@@ -81,7 +81,7 @@ class ParkingController extends Controller
 
     public function detail($parkir)
     {
-        $getParkir = Parking::with('vehicle')->find($parkir);
+        $getParkir = Parking::with('vehicle', 'user')->find($parkir);
         return view('parkir.detail', compact('getParkir'));
     }
 
@@ -164,7 +164,7 @@ class ParkingController extends Controller
             'vehicle_id' => $vehicle,
             'waktu_masuk' => $waktu_masuk,
             'status' => 'Aktif',
-            'petugas' => Auth::user()->id,
+            'user_id' => Auth::user()->user_id,
             'tarif' => $tarif
         ]);
 
@@ -172,53 +172,6 @@ class ParkingController extends Controller
         $export = true;
 
         return view('parkir.masuk', compact('parkir', 'submit', 'export'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $parkir)
-    {
-        //
-    }
-
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     public function keluar(Request $request, $parkir)
@@ -244,7 +197,7 @@ class ParkingController extends Controller
         $getParkir->update([
             'waktu_keluar' => $waktu_keluar,
             'tarif' => $tarif,
-            'petugas' => Auth::user()->id,
+            'user_id' => Auth::user()->user_id,
             'status' => 'Keluar'
         ]);
 

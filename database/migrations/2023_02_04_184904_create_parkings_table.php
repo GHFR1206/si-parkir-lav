@@ -17,7 +17,7 @@ class CreateParkingsTable extends Migration
             $table->id();
             $table->string('kode_parkir')->unique();
             $table->unsignedBigInteger('vehicle_id');
-            $table->string('petugas');
+            $table->unsignedBigInteger('user_id');
             $table->dateTime('waktu_masuk');
             $table->dateTime('waktu_keluar')->nullable();
             $table->integer('tarif')->nullable();
@@ -25,6 +25,7 @@ class CreateParkingsTable extends Migration
             $table->timestamps();
 
             $table->foreign('vehicle_id')->references('vehicle_id')->on('vehicles')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('user_id')->references('user_id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

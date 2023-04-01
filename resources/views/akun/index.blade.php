@@ -27,23 +27,44 @@
                                     <td>
                                         @if ($akun->role == 0)
                                             Admin
-                                        @else
+                                        @elseif($akun->role == 1)
                                             Petugas
+                                        @else
+                                            Nonrole Akun
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('akun.edit', $akun->id) }}" class="btn btn-warning"><i
-                                                class="fa-solid fa-pen-to-square"></i></a>
+                                        @if ($akun->role == 0)
+                                            <a href="{{ route('akun.edit', $akun->user_id) }}" class="btn btn-warning"><i
+                                                    class="fa-solid fa-pen-to-square"></i></a>
 
-                                        <a href="#"
-                                            onclick="event.preventDefault(); document.getElementById('akun.destroy').submit();"
-                                            class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>
+                                            <a href="#"
+                                                onclick="event.preventDefault(); document.getElementById('akun.destroy').submit();"
+                                                class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>
 
-                                            <form action="{{ route('akun.destroy', $akun->id) }}" method="POST"
-                                                id="akun.destroy">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form>
+                                                <form action="{{ route('akun.destroy', $akun->user_id) }}"
+                                                    method="POST" id="akun.destroy">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+                                            @elseif($akun->role == 1)
+                                                <a href="{{ route('akun.edit', $akun->user_id) }}"
+                                                    class="btn btn-warning"><i
+                                                        class="fa-solid fa-pen-to-square"></i></a>
+
+                                                <a href="#"
+                                                    onclick="event.preventDefault(); document.getElementById('akun.destroy').submit();"
+                                                    class="btn btn-danger"><i class="fa fa-trash"
+                                                        aria-hidden="true"></i>
+
+                                                    <form action="{{ route('akun.destroy', $akun->user_id) }}"
+                                                        method="POST" id="akun.destroy">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                @else
+                                                    Nonactionable Akun
+                                        @endif
                                     </td>
                                 </tr>
                             @empty

@@ -21,27 +21,27 @@ class ReportController extends Controller
     {
         // Query data sesuai dengan filter yang diipilih
         if ($request->tipe == 'All') {
-            $kendaraan = Parking::with('vehicle')->whereBetween('created_at', [$request->start_date . ' 00:00:00', $request->end_date . ' 23:59:59'])->get();
-            $vehicle = Parking::with('vehicle')->whereBetween('created_at', [$request->start_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
+            $kendaraan = Parking::with('vehicle', 'user')->whereBetween('created_at', [$request->start_date . ' 00:00:00', $request->end_date . ' 23:59:59'])->get();
+            $vehicle = Parking::with('vehicle', 'user')->whereBetween('created_at', [$request->start_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
 
             // Menghitung total mobil
-            $mobil = Parking::with('vehicle')->whereBetween('created_at', [$request->start_date . ' 00:00:00', $request->end_date . ' 23:59:59'])->whereHas('vehicle', function ($query) {
+            $mobil = Parking::with('vehicle', 'user')->whereBetween('created_at', [$request->start_date . ' 00:00:00', $request->end_date . ' 23:59:59'])->whereHas('vehicle', function ($query) {
                 $query->where('tipe', 'Mobil');
             })->count();
 
             // Menghitung total motor
-            $motor = Parking::with('vehicle')->whereBetween('created_at', [$request->start_date . ' 00:00:00', $request->end_date . ' 23:59:59'])->whereHas('vehicle', function ($query) {
+            $motor = Parking::with('vehicle', 'user')->whereBetween('created_at', [$request->start_date . ' 00:00:00', $request->end_date . ' 23:59:59'])->whereHas('vehicle', function ($query) {
                 $query->where('tipe', 'Motor');
             })->count();
 
-            $truk = Parking::with('vehicle')->whereBetween('created_at', [$request->start_date . ' 00:00:00', $request->end_date . ' 23:59:59'])->whereHas('vehicle', function ($query) {
+            $truk = Parking::with('vehicle', 'user')->whereBetween('created_at', [$request->start_date . ' 00:00:00', $request->end_date . ' 23:59:59'])->whereHas('vehicle', function ($query) {
                 $query->where('tipe', 'Truk/Lainnya');
             })->count();
         } else {
-            $kendaraan = Parking::with('vehicle')->whereHas('vehicle', function ($query) use ($request) {
+            $kendaraan = Parking::with('vehicle', 'user')->whereHas('vehicle', function ($query) use ($request) {
                 $query->where('tipe', $request->tipe);
             })->whereBetween('created_at', [$request->start_date . ' 00:00:00', $request->end_date . ' 23:59:59'])->get();
-            $vehicle = Parking::with('vehicle')->whereHas('vehicle', function ($query) use ($request) {
+            $vehicle = Parking::with('vehicle', 'user')->whereHas('vehicle', function ($query) use ($request) {
                 $query->where('tipe', $request->tipe);
             })->whereBetween('created_at', [$request->start_date . ' 00:00:00', $request->end_date . ' 23:59:59']);
 
@@ -104,7 +104,7 @@ class ReportController extends Controller
 
     public function exportInvoice($parkir)
     {
-        $getParkir = Parking::where('kode_parkir', $parkir)->first();
+        $getParkir = Parking::with('user')->where('kode_parkir', $parkir)->first();
         $tanggal_masuk = Carbon::parse($getParkir->waktu_masuk)->format('d/m/y');
 
         view()->share('getParkir', $getParkir);
@@ -114,12 +114,12 @@ class ReportController extends Controller
 
     public function exportKeluar($parkir)
     {
-        $getParkir = Parking::where('kode_parkir', $parkir)->first();
+        $getParkir = Parking::with('user')->where('kode_parkir', $parkir)->first();
         $tanggal_masuk = Carbon::parse($getParkir->waktu_masuk)->format('d/m/y');
         $tanggal_keluar = Carbon::parse($getParkir->waktu_keluar)->format('d/m/y');
 
         view()->share('getParkir', $getParkir);
-        $pdf = PDF::loadView('report.keluar', compact('getParkir', 'tanggal_masuk', 'tanggal_keluar'))->setPaper('B6');
+        $pdf = PDF::loadView('report.keluar', compact('getParkir', 'tanggal_masuk', 'tanggal_keluar'))->setPaper('B5');
         return $pdf->download("keluar-$getParkir->kode_parkir" . '.pdf');
     }
 

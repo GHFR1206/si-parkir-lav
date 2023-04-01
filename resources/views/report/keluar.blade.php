@@ -42,7 +42,8 @@
                 <p style="margin-top: -9px;font-size:30px;">
                     {{ $getParkir->kode_parkir }}
                 </p>
-                <p class="mt-2" style="font-size:10px;">Terimakasih telah menggunakan layanan kami!/p>
+                <small>Petugas : {{ $getParkir->user->name }}</small>
+                <p class="mt-2" style="font-size:10px;">Terimakasih telah menggunakan layanan kami!</p>
             </div>
         </section>
         <!-- /.content -->

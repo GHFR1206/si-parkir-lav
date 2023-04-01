@@ -36,14 +36,7 @@
                                 <li class="list-group-item">{{ $getParkir->vehicle->no_kendaraan }}</li>
                                 <li class="list-group-item">{{ $getParkir->kode_parkir }}</li>
                                 <li class="list-group-item">{{ $getParkir->vehicle->tipe }}</li>
-                                <li class="list-group-item">
-                                    @if ($getParkir->petugas == 0)
-                                        Admin
-                                    @elseif ($getParkir->petugas == 1)
-                                        Petugas
-                                    @else
-                                        User
-                                    @endif
+                                <li class="list-group-item">{{ $getParkir->user->name }}
                                 </li>
                                 <li class="list-group-item">{{ $getParkir->waktu_masuk }}</li>
                                 @if ($getParkir->status == 'Keluar')

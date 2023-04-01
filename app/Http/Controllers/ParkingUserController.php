@@ -88,9 +88,9 @@ class ParkingUserController extends Controller
         ]);
 
         if (Auth::guest()) {
-            $petugas = 'user';
+            $petugas = '0';
         } else {
-            $petugas = Auth::user()->id;
+            $petugas = Auth::user()->user_id;
         }
 
         $parkir = Parking::create([
@@ -98,7 +98,7 @@ class ParkingUserController extends Controller
             'vehicle_id' => $pengendara->vehicle_id,
             'waktu_masuk' => $waktu_masuk,
             'status' => 'Aktif',
-            'petugas' => $petugas,
+            'user_id' => $petugas,
             'tarif' => $tarif
         ]);
 
@@ -165,7 +165,7 @@ class ParkingUserController extends Controller
                 $tanggal_keluar = Carbon::now()->format('M d Y');
 
                 if (Auth::guest()) {
-                    $petugas = 'user';
+                    $petugas = '0';
                 } else {
                     $petugas = Auth::user()->id;
                 }
@@ -174,7 +174,7 @@ class ParkingUserController extends Controller
                 $data->update([
                     'waktu_keluar' => $waktu_keluar,
                     'tarif' => $tarif,
-                    'petugas' => $petugas,
+                    'user_id' => $petugas,
                     'status' => 'Keluar'
                 ]);
             }
