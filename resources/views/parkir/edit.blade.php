@@ -1,113 +1,97 @@
-<x-app-layout title="Ubah Data Parkir" tambah="active">
+<x-app-login title="Ubah Data Parkir">
+    <div class="login-box">
+        <div class="login-logo">
+            <a class="text-white" href="{{ route('home') }}"><b>GHFR</b>ParkNet.Id</a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Ubah data kendaraan disini</p>
 
-  <div class="container-fluid mt-n4">
-    <div class="row justify-content-center">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                  @include('layouts._card-navbar')
-                </div>
-
-                <div class="card-body">
-                    <div class="row icon-examples">
-                        <div class="col-lg">
-                            <div class="card-group">
-                                <div class="col-lg-6">
-                                    <div class="card" style="height: 28rem;">
-                                        <div class="card-header">
-                                            <h5 class="card-title mb-0">Input Kendaraan Masuk</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="container h-100">
-                                                <div class="row align-items-center h-100">
-                                                    <div class="col mx-auto">
-                                                      <form action="{{ route('parkir.store') }}" method="POST">
-                                                        @csrf
-                                                        @include('layouts._form')
-                                                      </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="card" style="height: 28rem;">
-                                        <div class=" card-header">
-                                            <h5 class="card-title mb-0">Tiket parkir</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="container h-100">
-                                                <div class="row align-items-center h-100">
-                                                    <div class="col mx-auto">
-                                                        @if($parkir == 'belumKeluar')
-                                                        <div class="col-lg text-center">
-                                                            <h3>NOMOR POLISI KENDARAAN SUDAH MASUK TEMPAT PARKIR DAN BELUM KELUAR</h3>
-                                                        </div>
-                                                        @elseif($parkir)
-                                                        <div class=" container text-center p-0">
-                                                            <h5>Tiket Parkir</h5>
-                                                            <br>
-                                                            <p class="p-0" style="margin-top: -12px !important; font-size:10px">Thamrin Office Park AA03 Jl. Boulevard, Jl. Teluk Betung, RT.11/RW.9, Kb. Melati, Kecamatan Tanah Abang , Daerah Khusus Ibukota Jakarta, 10240.</p>
-                                                            <p class="mt-1">{{$waktu_masuk}}</p>
-                                                            <h5 style="margin-top: -6px;">KODE PARKIR : </h5>
-                                                            <p style="margin-top: -9px;font-size:30px;">{{$kode_unik}}</p>
-                                                            <p class="mt-2" style="font-size:10px;">1. KERUSAKAN & KEHILANGAN BARANG DALAM KENDARAAN JADI TANGGUNG JAWAB PEMILIK (TIDAK ADA PENGGANTIAN) <br>
-                                                                2. BERLAKU 1X (SATU KALI) PARKIR</p>
-                                                        </div>
-                                                        @else
-                                                        <div class="col-lg text-center">
-                                                            <h3>SILAHKAN INPUT KENDARAAN MASUK UNTUK MENDAPATKAN TIKET PARKIR</h3>
-                                                        </div>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                <form action="{{ route('parkir.update', $getParkir->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control @error('no_kendaraan') is-invalid @enderror"
+                            name="no_kendaraan"
+                            value="<?= old('no_kendaraan') ? old('no_kendaraan') : $getParkir->vehicle->no_kendaraan ?>"
+                            placeholder="Nomor Kendaraan" autocomplete="off">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fa-solid fa-car"></span>
                             </div>
                         </div>
+                        @error('no_kendaraan')
+                            <span class="invalid-feedback">{{ $message }}</span>
+                        @enderror
                     </div>
-                </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control @error('waktu_masuk') is-invalid @enderror"
+                            name="waktu_masuk"
+                            value="<?= old('waktu_masuk') ? old('waktu_masuk') : $getParkir->waktu_masuk ?>"
+                            placeholder="Waktu Masuk" autocomplete="off">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fa-solid fa-car"></span>
+                            </div>
+                        </div>
+                        @error('waktu_masuk')
+                            <span class="invalid-feedback">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control @error('waktu_keluar') is-invalid @enderror"
+                            name="waktu_keluar"
+                            value="<?= old('waktu_keluar') ? old('waktu_keluar') : $getParkir->waktu_keluar ?>"
+                            placeholder="Waktu Keluar" autocomplete="off">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fa-solid fa-car"></span>
+                            </div>
+                        </div>
+                        @error('waktu_keluar')
+                            <span class="invalid-feedback">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="input-group ml-2 mb-3 d-flex justify-content-center">
+                        <div class="form-check mr-4">
+                            <input class="form-check-input" type="radio" name="tipe" id="motor" value="Motor"
+                                @if ($getParkir->vehicle->tipe == 'Motor') checked @endif>
+                            <label class="form-check-label" for="motor">
+                                Motor
+                            </label>
+                        </div>
+                        <div class="form-check mr-4">
+                            <input class="form-check-input" type="radio" name="tipe" id="mobil" value="Mobil"
+                                @if ($getParkir->vehicle->tipe == 'Mobil') checked @endif>
+                            <label class="form-check-label" for="mobil">
+                                Mobil
+                            </label>
+                        </div>
+                        <div class="form-check mr-4">
+                            <input class="form-check-input" type="radio" name="tipe" id="truk"
+                                value="Truk/Lainnya" @if ($getParkir->vehicle->tipe == 'Truk/Lainnya') checked @endif>
+                            <label class="form-check-label" for="truk">
+                                Truk/Lainnya
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- /.col -->
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block">Ubah</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+
+                </form>
             </div>
+            <!-- /.login-card-body -->
         </div>
     </div>
-</div>
-</x-app-layout>
-
-{{-- 
-  <div class="container mt-5">
-      <div class="row justify-content-center mt-5">
-        <div class="register-box">
-          <div class="register-logo">
-            <a href="#"><b>GHFR</b>ParkNet.Id</a>
-          </div>
-    
-          <div class="card">
-            <div class="card-body register-card-body">
-              <div class="row">
-                <div class="col-lg">
-                  <div class="card-group">
-                    <div class="col-lg-6">
-                      <div class="card">
-                        <div class="card-body">
-                          <p class="login-box-msg">Daftarkan kendaraan user disini</p>
-                            <form action="{{ route('parkir.store') }}" method="POST">
-                              @csrf
-                              @include('layouts._form')
-                            </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- /.form-box -->
-          </div>
-          <!-- /.card -->
-    </div>
-    <!-- /.register-box -->
-      </div>
-  </div> --}}
+    <!-- /.login-box -->
+</x-app-login>

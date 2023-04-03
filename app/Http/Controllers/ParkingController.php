@@ -262,4 +262,65 @@ class ParkingController extends Controller
             return view('parkir.keluar', compact('getParkir', 'parkir', 'export'));
         }
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $parkir
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($parkir)
+    {
+        $getParkir = Parking::with('vehicle')->find($parkir);
+        return view('parkir.edit', compact('getParkir'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $parkir
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $parkir)
+    {
+        $getParkir = Parking::find($parkir);
+        $getVehicle = Vehicle::find($getParkir->vehicle_id);
+
+        $request->validate([
+            'no_kendaraan' => ['required'],
+            'waktu_masuk' => ['required'],
+        ]);
+
+        $getParkir->update([
+            'waktu_masuk' => $request->waktu_masuk,
+            'waktu_keluar' => $request->waktu_keluar,
+        ]);
+
+        $getVehicle->update([
+            'no_kendaraan' => $request->no_kendaraan,
+            'tipe' => $request->tipe,
+        ]);
+
+        session()->flash('suksesUpdateParkir');
+        return redirect()->route('parkir.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Parking  $Parking
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Parking $Parking, $parkir)
+    {
+        $getParkir = Parking::with('vehicle')->find($parkir);
+        $getVehicle = Vehicle::find($getParkir->vehicle_id);
+
+        $getVehicle->delete();
+        $getParkir->delete();
+
+        session()->flash('suksesHapusParkir');
+        return redirect()->route('parkir.index');
+    }
 }

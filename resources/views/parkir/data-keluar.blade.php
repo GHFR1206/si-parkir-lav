@@ -103,7 +103,24 @@
                                     <td>{{ $data->waktu_masuk }}</td>
                                     <td>{{ $data->waktu_keluar }}</td>
                                     <td>
-                                        <a href="{{route('parkir.detail', $data->id)}}" class="btn btn-primary" ><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        <a href="{{ route('parkir.detail', $data->id) }}" class="btn btn-primary"><i
+                                                class="fa fa-eye" aria-hidden="true"></i></a>
+
+                                        @if (Auth::user()->role == 0)
+                                            <a href="{{ route('parkir.edit', $data->id) }}" class="btn btn-warning"><i
+                                                    class="fa-solid fa-pen-to-square"></i></a>
+
+                                            <a href="#"
+                                                onclick="event.preventDefault(); document.getElementById('parkir.destroy').submit();"
+                                                class="btn btn-danger"><i class="fa fa-trash"
+                                                    aria-hidden="true"></i></a>
+
+                                            <form action="{{ route('parkir.destroy', $data->id) }}" method="POST"
+                                                id="parkir.destroy">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @empty

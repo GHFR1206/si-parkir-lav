@@ -105,16 +105,30 @@
                                                 class="fa fa-eye" aria-hidden="true"></i></a>
 
                                         @if (Auth::user()->role == 0)
+                                            <a href="{{ route('parkir.edit', $data->id) }}" class="btn btn-warning"><i
+                                                    class="fa-solid fa-pen-to-square"></i></a>
+
                                             <a href="#"
+                                                onclick="event.preventDefault(); document.getElementById('parkir.destroy').submit();"
+                                                class="btn btn-danger"><i class="fa fa-trash"
+                                                    aria-hidden="true"></i></a>
+
+                                            <form action="{{ route('parkir.destroy', $data->id) }}" method="POST"
+                                                id="parkir.destroy">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+
+                                            {{-- <a href="#"
                                                 onclick="event.preventDefault(); document.getElementById('parkir.update.keluar').submit();"
-                                                class="btn btn-danger"><i
+                                                class="btn btn-warning"><i
                                                     class="fa-solid fa-right-from-bracket"></i></a>
 
                                             <form action="{{ route('parkir.update.keluar', $data->kode_parkir) }}"
                                                 method="POST" id="parkir.update.keluar">
                                                 @csrf
                                                 @method('put')
-                                            </form>
+                                            </form> --}}
                                         @endif
                                     </td>
                                 </tr>

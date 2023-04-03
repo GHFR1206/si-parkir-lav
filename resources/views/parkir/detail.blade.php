@@ -28,6 +28,7 @@
                                 <li class="list-group-item font-weight-bold">Waktu Masuk</li>
                                 @if ($getParkir->status == 'Keluar')
                                     <li class="list-group-item font-weight-bold">Waktu Keluar</li>
+                                    <li class="list-group-item font-weight-bold">Tarif</li>
                                 @endif
                             </ul>
                         </div>
@@ -41,6 +42,7 @@
                                 <li class="list-group-item">{{ $getParkir->waktu_masuk }}</li>
                                 @if ($getParkir->status == 'Keluar')
                                     <li class="list-group-item">{{ $getParkir->waktu_keluar }}</li>
+                                    <li class="list-group-item">{{ $getParkir->tarif }}</li>
                                 @endif
                             </ul>
                         </div>

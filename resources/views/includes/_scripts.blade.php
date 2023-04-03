@@ -132,6 +132,18 @@
 </script>
 
 <script>
+    @if (Session::has('suksesHapusParkir'))
+        toastr.success('Kendaraan berhasil dihapus!', 'Berhasil Dihapus')
+    @endif
+</script>
+
+<script>
+    @if (Session::has('suksesEditParkir'))
+        toastr.success('Kendaraan berhasil diubah!', 'Berhasil Diubah')
+    @endif
+</script>
+
+<script>
     @if (Session::has('suksesHapusAkun'))
         toastr.success('Akun berhasil dihapus!', 'Berhasil Dihapus')
     @endif
