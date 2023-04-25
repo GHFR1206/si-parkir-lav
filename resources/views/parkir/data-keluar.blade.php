@@ -106,7 +106,7 @@
                                         <a href="{{ route('parkir.detail', $data->id) }}" class="btn btn-primary"><i
                                                 class="fa fa-eye" aria-hidden="true"></i></a>
 
-                                        @if (Auth::user()->role == 0)
+                                        @if (Auth::user()->role->role == 'Admin')
                                             <a href="{{ route('parkir.edit', $data->id) }}" class="btn btn-warning"><i
                                                     class="fa-solid fa-pen-to-square"></i></a>
 

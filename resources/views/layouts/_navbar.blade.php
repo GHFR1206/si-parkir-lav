@@ -35,14 +35,13 @@
             </li>
         @endif
 
-        @if (Auth::user()->role == 0)
+        @if (Auth::user()->role->role == 'Admin')
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="{{ route('register') }}" class="nav-link"><i class="nav-icon fas fa-user-plus"></i></a>
             </li>
         @endif
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#"
-                onclick="event.preventDefault(); 
+            <a href="#" onclick="event.preventDefault();
         document.getElementById('logout-form').submit();"
                 class="nav-link"><i class="nav-icon fas fa-right-from-bracket"></i></a>
         </li>

@@ -51,8 +51,10 @@
         @enderror" id="inputGroupSelect04"
             name="role">
             <option selected disabled>Pilih role akun...</option>
-            <option value="0">Admin</option>
-            <option value="1">Petugas</option>
+            @foreach ($role as $r)
+                <option value="{{ $r->id }}">{{ $r->role }}</option>
+            @endforeach
+
         </select>
         @error('role')
             <div class="invalid-feedback">

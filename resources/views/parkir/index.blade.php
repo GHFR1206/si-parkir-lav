@@ -5,12 +5,12 @@
             <!-- small box -->
             <div class="small-box bg-secondary">
                 <div class="inner">
-                    <h3>Rp. {{ number_format($pendapatan, 0, ',', '.') }}</h3>
+                    <h3>{{ $aktif }}</h3>
 
-                    <p>Total Pendapatan</p>
+                    <p>Total Kendaraan Parkir</p>
                 </div>
                 <div class="icon">
-                    <i class="fas fa-file-invoice-dollar"></i>
+                    <i class="fa-solid fa-signal-bars"></i>
                 </div>
             </div>
         </div>
@@ -76,9 +76,6 @@
                                 href="{{ route('parkir.data-keluar') }}">Kendaraan
                                 Keluar</a>
                         </li>
-                        <li class="nav-item">
-                            <p class="nav-link">Aktif : {{ $aktif }}</p>
-                        </li>
                     </ul>
                 </div>
                 <!-- /.card-header -->
@@ -104,7 +101,7 @@
                                         <a href="{{ route('parkir.detail', $data->id) }}" class="btn btn-primary"><i
                                                 class="fa fa-eye" aria-hidden="true"></i></a>
 
-                                        @if (Auth::user()->role == 0)
+                                        @if (Auth::user()->role->role == 'Admin')
                                             <a href="{{ route('parkir.edit', $data->id) }}" class="btn btn-warning"><i
                                                     class="fa-solid fa-pen-to-square"></i></a>
 
@@ -118,17 +115,6 @@
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
-
-                                            {{-- <a href="#"
-                                                onclick="event.preventDefault(); document.getElementById('parkir.update.keluar').submit();"
-                                                class="btn btn-warning"><i
-                                                    class="fa-solid fa-right-from-bracket"></i></a>
-
-                                            <form action="{{ route('parkir.update.keluar', $data->kode_parkir) }}"
-                                                method="POST" id="parkir.update.keluar">
-                                                @csrf
-                                                @method('put')
-                                            </form> --}}
                                         @endif
                                     </td>
                                 </tr>

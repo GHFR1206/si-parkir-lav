@@ -23,7 +23,12 @@ use App\Http\Controllers\Auth\RegisterController;
 */
 
 Auth::routes();
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register')->middleware(['auth', 'admin']);
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+
+// Route::get('/', [ParkingController::class, 'index'])->name('home')->middleware('auth');
+
+//Dashboard
+Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 // Admin
 Route::controller(ParkingController::class)->middleware('auth')->group(function () {
@@ -40,7 +45,7 @@ Route::controller(ParkingController::class)->middleware('auth')->group(function 
 
 // User
 Route::resource('user', ParkingUserController::class);
-Route::get('/', [ParkingUserController::class, 'index'])->name('home');
+// Route::get('/', [ParkingUserController::class, 'index'])->name('home');
 Route::get('/user/{user}/keluar', [ParkingUserController::class, 'edit'])->name('user.keluar');
 
 // Report Controlller

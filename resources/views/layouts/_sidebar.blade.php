@@ -16,10 +16,9 @@
                 </div>
                 <div class="info">
                     <a href="{{ route('profile') }}" class="d-block">{{ Auth::user()->username }}
-                        @if (Auth::user()->role == '0')
+                        @if (Auth::user()->role->role == 'Admin')
                             <small class="text-muted">(admin)</small>
-                        @endif
-                        @if (Auth::user()->role == '1')
+                        @else
                             <small class="text-muted">(petugas)</small>
                         @endif
                     </a>
@@ -49,7 +48,7 @@
                             </p>
                         </a>
                     </li>
-                    @if (Auth::user()->role == 0)
+                    @if (Auth::user()->role->role == 'Admin')
                         <li class="nav-item">
                             <a href="{{ route('akun.index') }}"
                                 class="nav-link {{ request()->routeIs('akun.index') ? 'active' : '' }}">

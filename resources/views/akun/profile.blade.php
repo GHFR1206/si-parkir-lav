@@ -32,11 +32,7 @@
                                 <li class="list-group-item">{{ Auth::user()->name }}</li>
                                 <li class="list-group-item">{{ Auth::user()->username }}</li>
                                 <li class="list-group-item">{{ Auth::user()->email }}</li>
-                                @if (Auth::user()->role == 0)
-                                    <li class="list-group-item">Admin</li>
-                                @else
-                                    <li class="list-group-item">Petugas</li>
-                                @endif
+                                <li class="list-group-item">{{ Auth::user()->role->role }}</li>
                             </ul>
                         </div>
                     </div>

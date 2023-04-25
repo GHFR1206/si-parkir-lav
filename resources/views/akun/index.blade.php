@@ -25,16 +25,16 @@
                                     <td>{{ $akun->name }}</td>
                                     <td>{{ $akun->email }}</td>
                                     <td>
-                                        @if ($akun->role == 0)
+                                        @if ($akun->role->role == 'Admin')
                                             Admin
-                                        @elseif($akun->role == 1)
+                                        @elseif($akun->role-> == 'Petugas')
                                             Petugas
                                         @else
                                             Nonrole Akun
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($akun->role == 0)
+                                        @if ($akun->role->role == 'Admin')
                                             <a href="{{ route('akun.edit', $akun->user_id) }}" class="btn btn-warning"><i
                                                     class="fa-solid fa-pen-to-square"></i></a>
 
@@ -47,7 +47,7 @@
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
-                                            @elseif($akun->role == 1)
+                                            @elseif($akun->role->role == 'Petugas')
                                                 <a href="{{ route('akun.edit', $akun->user_id) }}"
                                                     class="btn btn-warning"><i
                                                         class="fa-solid fa-pen-to-square"></i></a>

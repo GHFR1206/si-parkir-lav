@@ -32,7 +32,7 @@
                                 <li class="list-group-item">{{ $getAkun->name }}</li>
                                 <li class="list-group-item">{{ $getAkun->username }}</li>
                                 <li class="list-group-item">{{ $getAkun->email }}</li>
-                                @if ($getAkun->role == 0)
+                                @if ($getAkun->role->role == 'Admin')
                                     <li class="list-group-item">Admin</li>
                                 @else
                                     <li class="list-group-item">Petugas</li>

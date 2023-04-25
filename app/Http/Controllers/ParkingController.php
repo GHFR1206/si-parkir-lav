@@ -45,9 +45,7 @@ class ParkingController extends Controller
         } else {
             $getParkir = Parking::with('vehicle')->where('status', 'aktif')->latest()->paginate('7');
         }
-
-        $pendapatan = Parking::sum('tarif');
-        return view('parkir.index', compact('aktif', 'getParkir', 'pendapatan', 'motor', 'mobil', 'truk'));
+        return view('parkir.index', compact('aktif', 'getParkir', 'motor', 'mobil', 'truk'));
     }
 
     public function data_keluar(Request $request)
