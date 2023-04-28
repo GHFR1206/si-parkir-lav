@@ -11,7 +11,7 @@
 
 <div class="input-group mb-3">
     <input type="text" class="form-control @error('no_kendaraan') is-invalid @enderror" name="no_kendaraan"
-        value="{{ old('no_kendaraan') }}" placeholder="Nomor Kendaraan" autocomplete="off">
+        value="{{ old('no_kendaraan') }}" placeholder="Nomor Kendaraan" autocomplete="off" autofocus>
     <div class="input-group-append">
         <div class="input-group-text">
             <span class="fa-solid fa-car"></span>

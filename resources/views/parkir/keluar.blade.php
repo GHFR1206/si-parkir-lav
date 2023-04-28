@@ -141,8 +141,6 @@
                                             <a class="btn btn-primary"
                                                 href="{{ route('report.exportKeluar', $getParkir->kode_parkir) }}"><i
                                                     class="fas fa-file-pdf"></i></a>
-                                            <a href="#" rel="noopener" target="_blank" onclick="window.print();"
-                                                class="btn btn-primary"><i class="fas fa-print"></i></a>
                                         @endif
                                     </div>
                                 </div>

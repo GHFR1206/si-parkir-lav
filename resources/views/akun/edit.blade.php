@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-body login-card-body">
                         <p class="login-box-msg">Edit Informasi Akun</p>
-                        <form action="{{ route('akun.update', $getAkun->id) }}" method="post">
+                        <form action="{{ route('akun.update', $getAkun->user_id) }}" method="post">
                             @method('PUT')
                             @include('includes._editAkun-form')
                         </form>

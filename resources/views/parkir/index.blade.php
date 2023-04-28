@@ -1,6 +1,9 @@
 <x-app-layout title="Data Aktif" aktif="active" header="Data Parkir Masuk">
     <!-- Small boxes (Stat box) -->
     <div class="row d-flex justify-content-center">
+        <div class="col-sm-12 mb-3 d-flex justify-content-end">
+            <strong><span id="tanggal"></span> ; <span id="watch"></span></strong>
+        </div>
         <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-secondary">
@@ -59,9 +62,9 @@
     </div>
     <!-- /.row -->
     <!-- Main row -->
-    <div class="row">
+    <div class="row d-flex justify-content-center">
         <!-- Tabel Kendaraan Aktif -->
-        <div class="col-12 mb-5">
+        <div class="col-10 mb-5">
             <div class="card text-center">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
@@ -72,7 +75,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('parkir.data-keluar') ? 'active' : '' }}"
+                            <a class="nav-link text-primary {{ request()->routeIs('parkir.data-keluar') ? 'active' : '' }}"
                                 href="{{ route('parkir.data-keluar') }}">Kendaraan
                                 Keluar</a>
                         </li>
@@ -98,7 +101,7 @@
                                     <td>{{ $data->vehicle->tipe }}</td>
                                     <td>{{ $data->waktu_masuk }}</td>
                                     <td>
-                                        <a href="{{ route('parkir.detail', $data->id) }}" class="btn btn-primary"><i
+                                        <a href="{{ route('parkir.detail', $data->id) }}" class="btn btn-info"><i
                                                 class="fa fa-eye" aria-hidden="true"></i></a>
 
                                         @if (Auth::user()->role->role == 'Admin')

@@ -101,7 +101,7 @@ class AkunController extends Controller
             'username' => $request->username,
             'name' => $request->name,
             'email' => $request->email,
-            'role' => $request->role,
+            'role_id' => $request->role,
         ]);
 
         session()->flash('suksesUpdateAkun');

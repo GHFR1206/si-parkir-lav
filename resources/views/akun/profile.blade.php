@@ -1,4 +1,4 @@
-<x-app-layout title="My Profile" header="My Profile">
+<x-app-layout title="Profil" header="Profil">
     <div class="header">
         <div class="container-fluid">
             <div class="header-body">
@@ -13,7 +13,7 @@
     <!-- Page content -->
     <div class="container-fluid mt--6">
         <div class="row justify-content-center">
-            <div class="col-lg">
+            <div class="col-lg-10">
                 <div class="card">
                     <div class="card-header">
                         <h5 class="mt-1">Data Pribadi</h5>

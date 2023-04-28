@@ -94,14 +94,14 @@
     </div>
 </x-app-layout>
 
-{{-- 
+{{--
   <div class="container mt-5">
       <div class="row justify-content-center mt-5">
         <div class="register-box">
           <div class="register-logo">
             <a href="#"><b>GHFR</b>ParkNet.Id</a>
           </div>
-    
+
           <div class="card">
             <div class="card-body register-card-body">
               <div class="row">

@@ -4,6 +4,13 @@
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ !request()->routeIs('home') ? 'active' : '' }}"
+                href="{{ route('parkir.index') }}">Parkir</a>
+        </li>
     </ul>
 
     <!-- Right navbar links -->

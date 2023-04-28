@@ -23,7 +23,7 @@ use App\Http\Controllers\Auth\RegisterController;
 */
 
 Auth::routes();
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register')->middleware(['auth', 'admin']);
 
 // Route::get('/', [ParkingController::class, 'index'])->name('home')->middleware('auth');
 

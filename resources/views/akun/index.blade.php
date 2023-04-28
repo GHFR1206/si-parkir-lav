@@ -1,8 +1,11 @@
 <x-app-layout title="Akun" header="Akun">
     <!-- Main row -->
-    <div class="row">
+    <div class="row d-flex justify-content-center">
+        <div class="col-sm-12 mb-3 d-flex justify-content-end">
+            <strong><span id="tanggal"></span> ; <span id="watch"></span></strong>
+        </div>
         <!-- Tabel Kendaraan Aktif -->
-        <div class="col-12 mb-5">
+        <div class="col-10 mb-5">
             <div class="card text-center">
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
@@ -27,7 +30,7 @@
                                     <td>
                                         @if ($akun->role->role == 'Admin')
                                             Admin
-                                        @elseif($akun->role-> == 'Petugas')
+                                        @elseif($akun->role->role == 'Petugas')
                                             Petugas
                                         @else
                                             Nonrole Akun
@@ -70,7 +73,7 @@
                             @empty
                                 <tr>
                                     <td colspan="6" class="text-center p-5">
-                                        Belum ada yang parkir
+                                        Tidak ada akun
                                     </td>
                                 </tr>
                             @endforelse

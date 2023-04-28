@@ -53,12 +53,12 @@
         name="role">
 
         <option disabled>Pilih role akun..</option>
-        @if ($getAkun->role == 0)
-            <option selected value="0">Admin</option>
-            <option value="1">Petugas</option>
+        @if ($getAkun->role->role == 'Admin')
+            <option selected value="1">Admin</option>
+            <option value="2">Petugas</option>
         @else
-            <option value="0">Admin</option>
-            <option selected value="1">Petugas</option>
+            <option value="1">Admin</option>
+            <option selected value="2">Petugas</option>
         @endif
 
     </select>

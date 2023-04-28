@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\ParkirChart;
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -17,8 +20,8 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(ParkirChart $chart)
     {
-        return view('dashboard.index');
+        return view('index', ['chart' => $chart->build()]);
     }
 }
