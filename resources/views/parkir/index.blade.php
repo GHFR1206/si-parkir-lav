@@ -101,7 +101,7 @@
                                     <td>{{ $data->vehicle->tipe }}</td>
                                     <td>{{ $data->waktu_masuk }}</td>
                                     <td>
-                                        <a href="{{ route('parkir.detail', $data->id) }}" class="btn btn-info"><i
+                                        <a href="{{ route('parkir.detail', $data->id) }}" class="btn btn-primary"><i
                                                 class="fa fa-eye" aria-hidden="true"></i></a>
 
                                         @if (Auth::user()->role->role == 'Admin')

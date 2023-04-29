@@ -24,5 +24,15 @@ class AdminSeeder extends Seeder
                 'role_id' => 1
             ],
         );
+
+        User::create(
+            [
+                'username' => 'petugas1',
+                'name' => 'Petugas Satu',
+                'email' => 'petugas1@gmail.com',
+                'password' => Hash::make('petugas1'),
+                'role_id' => 2
+            ],
+        );
     }
 }
