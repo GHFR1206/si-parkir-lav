@@ -16,22 +16,21 @@ class CreateParkingsTable extends Migration
         Schema::create('parkings', function (Blueprint $table) {
             $table->id();
             $table->string('kode_parkir')->unique();
-            $table->unsignedBigInteger('vehicle_id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('vehicle_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->dateTime('waktu_masuk');
             $table->dateTime('waktu_keluar')->nullable();
             $table->integer('tarif')->nullable();
             $table->string('status');
             $table->timestamps();
 
-            $table->foreign('vehicle_id')->references('vehicle_id')->on('vehicles')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign('user_id')->references('user_id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('vehicle_id')->references('vehicle_id')->on('vehicles')->nullOnDelete()->cascadeOnUpdate();
+            $table->foreign('user_id')->references('user_id')->on('users')->nullOnDelete()->cascadeOnUpdate();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
      * @return void
      */
     public function down()
