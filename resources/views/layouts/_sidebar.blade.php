@@ -58,6 +58,16 @@
                                 </p>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('tarif.index') }}"
+                                class="nav-link {{ request()->routeIs('tarif.index') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-dollar-sign" aria-hidden="true"></i>
+                                <p>
+                                    Tarif
+                                </p>
+                            </a>
+                        </li>
                     @endif
                     <li class="nav-item">
                         <a href="{{ route('report.getLaporan') }}"

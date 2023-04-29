@@ -105,18 +105,19 @@
                                                 class="fa fa-eye" aria-hidden="true"></i></a>
 
                                         @if (Auth::user()->role->role == 'Admin')
-                                            <a href="{{ route('parkir.edit', $data->id) }}" class="btn btn-warning"><i
-                                                    class="fa-solid fa-pen-to-square"></i></a>
-
-                                            <a href="#"
-                                                onclick="event.preventDefault(); document.getElementById('parkir.destroy').submit();"
-                                                class="btn btn-danger"><i class="fa fa-trash"
-                                                    aria-hidden="true"></i></a>
+                                            <form action="{{ route('parkir.edit', $data->id) }}" class="d-inline"
+                                                method="GET">
+                                                <button type="submit" class="btn btn-warning"><i
+                                                        class="fa-solid fa-pen-to-square"></i></button>
+                                            </form>
 
                                             <form action="{{ route('parkir.destroy', $data->id) }}" method="POST"
-                                                id="parkir.destroy">
+                                                class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
+
+                                                <button type="submit" class="btn btn-danger"><i
+                                                        class="fas fa-trash-can"></i></button>
                                             </form>
                                         @endif
                                     </td>

@@ -10,6 +10,7 @@ use App\Http\Controllers\ParkingController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ParkingUserController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\PriceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,8 +61,9 @@ Route::controller(ReportController::class)->middleware('auth')->group(function (
 
 // Akun
 Route::get('/profile', [AkunController::class, 'profile'])->name('profile')->middleware('auth');
-Route::controller(AkunController::class)->middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('akun', AkunController::class);
+    Route::resource('tarif', PriceController::class);
 });
 
 // Route::get('/forgot/password', [AkunController::class, 'forgotPassword'])->name('forgot-password');

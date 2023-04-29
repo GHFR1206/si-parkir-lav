@@ -122,6 +122,12 @@
     @endif
 </script>
 
+<script>
+    @if (Session::has('suksesUpdateTarif'))
+        toastr.success('Tarif berhasil diubah!', 'Berhasil Diubah')
+    @endif
+</script>
+
 {{-- Sweetalert --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

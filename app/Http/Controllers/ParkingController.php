@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Price;
 use App\Models\Parking;
 use App\Models\Vehicle;
 use Illuminate\Support\Str;
@@ -97,7 +98,7 @@ class ParkingController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     w* Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -118,7 +119,7 @@ class ParkingController extends Controller
                 $data = $data;
                 $jam_masuk = Carbon::parse($data->waktu_masuk)->format('H:i:s');
                 $tanggal_masuk = Carbon::now()->format('M d Y');
-                $parkir = 'belumKeluar';
+                $parkir = 'belusmKeluar';
                 $export = null;
                 return view('parkir.masuk', compact('data', 'jam_masuk', 'tanggal_masuk', 'parkir', 'export'));
             }
@@ -137,11 +138,11 @@ class ParkingController extends Controller
         }
 
         if ($tipe == 'Motor') {
-            $tarif = "2000";
+            $tarif = Price::where('tipe', 'Motor')->first()->tarif;
         } elseif ($tipe == 'Mobil') {
-            $tarif = "3000";
+            $tarif = Price::where('tipe', 'Mobil')->first()->tarif;
         } else {
-            $tarif = "5000";
+            $tarif = Price::where('tipe', 'Truk/Lainnya')->first()->tarif;
         }
 
         // Cek vehicle apakah sudah ada

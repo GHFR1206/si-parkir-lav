@@ -92,7 +92,8 @@
                                                                         <p>Total Bayar</p>
                                                                     </div>
                                                                     <div class=" col-lg-7">
-                                                                        <h2 class="text-danger">{{ $hasil_rupiah }}</h2>
+                                                                        <h2 class="text-danger">
+                                                                            {{ $hasil_rupiah }}</h2>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
