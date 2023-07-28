@@ -24,7 +24,7 @@ use App\Http\Controllers\PriceController;
 */
 
 Auth::routes();
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register')->middleware(['auth', 'admin']);
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register')->middleware([]);
 
 // Route::get('/', [ParkingController::class, 'index'])->name('home')->middleware('auth');
 
