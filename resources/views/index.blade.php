@@ -132,12 +132,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <p><b>GHFRParkNet.Id</b>, aplikasi ini dibuat oleh seorang siswa SMKN 1 Ciomas atas dasar
                                 projek
                                 tugas sekaligus projek uji level. Siswa tersebut bernama <a
-                                    href="https://www.linkedin.com/in/ghifari-hamdanigiar-403740232/" target="_blank"
-                                    class="text-primary">Ghifari Hamdanigiar</a>.
+                                    href="https://ghfr1206.github.io" target="_blank" class="text-primary">Ghifari
+                                    Hamdanigiar</a>.
                             </p>
                         </div>
                         <div class="col-sm-6 d-flex justify-content-end">
                             <div class="button-group">
+                                <a href="https://ghfr1206.github.io" target="_blank"
+                                    class="btn btn-app bg-indigo rounded"><i class="fas fa-globe"></i>Website</a>
                                 <a href="https://mailto:aghifari1206@gmail.com" target="_blank"
                                     class="btn btn-app bg-blue rounded"><i class="fas fa-envelope"></i>Email</a>
                                 <a href="https://www.instagram.com/ghifari_hamdanigiar/" target="_blank"
@@ -146,8 +148,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     class="btn btn-app bg-red rounded"><i class="fab fa-pinterest"></i>Pinterest</a>
                                 <a href="https://github.com/GHFR1206" target="_blank"
                                     class="btn btn-app bg-gray rounded"><i class="fab fa-github"></i>GitHub</a>
-                                <a href="https://www.youtube.com/channel/UCbssHFLBkVHd4yRTahcpzUA" target="_blank"
-                                    class="btn btn-app bg-red rounded"><i class="fab fa-youtube"></i>Youtube</a>
                             </div>
                         </div>
                     </div>

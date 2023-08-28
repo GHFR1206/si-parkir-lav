@@ -13,7 +13,7 @@
                     <p>Total Kendaraan Parkir</p>
                 </div>
                 <div class="icon">
-                    <i class="fa-solid fa-signal-bars"></i>
+                    <i class="fas fa-signal"></i>
                 </div>
             </div>
         </div>

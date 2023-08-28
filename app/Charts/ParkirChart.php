@@ -73,7 +73,7 @@ class ParkirChart
         return $this->chart->areaChart()
             ->setTitle("Tahun $tahun")
             ->setSubtitle('Pengguna Parkir')
-            ->addData('Pengguna parkir', [$januari, $februari, $maret, $april, $mei, $juni, $juli, $agustus, $september, $november, $desember])
+            ->addData('Pengguna parkir', [$januari, $februari, $maret, $april, $mei, $juni, $juli, $agustus, $oktober, $september, $november, $desember])
             ->setXAxis(['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']);
     }
 }
